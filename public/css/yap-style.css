@@ -1,0 +1,44 @@
+:root{
+    --primary: #01227B
+    --font: #333
+}
+
+a{
+    text-decoration: none;
+}
+
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding-top:2rem;
+}
+
+h4{
+    font-family: 'Righteous', cursive;
+    color: #01227B;
+}
+
+.nav{
+    position: relative;
+}
+
+.decorated-text::before,
+.decorated-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.1;
+  z-index: 0;
+  background-image: url('/images/decor-left.png');
+}
+
+.hero{
+    background-image: url('/img/wisuda.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
