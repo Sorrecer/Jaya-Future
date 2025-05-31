@@ -1,6 +1,6 @@
 :root{
-    --primary: #01227B
-    --font: #333
+    --primary: #01227B;
+    --font: #333;
 }
 
 a{
@@ -14,9 +14,9 @@ body{
     padding-top:2rem;
 }
 
-h4{
+h4,h3,h1{
     font-family: 'Righteous', cursive;
-    color: #01227B;
+    color: var(--primary);
 }
 
 .nav{
@@ -41,4 +41,12 @@ h4{
     background-image: url('/img/wisuda.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
+    filter: grayscale(1);
+    color: white;
 }
+
+.hero i{
+    font-size: 2rem;
+}
+
+

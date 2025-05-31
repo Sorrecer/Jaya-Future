@@ -74,10 +74,46 @@
         </div>
     </section>
 
-    <section class="hero my-5">
-        <h3 class="text-center my-5">Have You Graduated Or Changed Your Career?</h3>
-        <div class="container d-flex justify-content-center gap-5">
-            
+    <section class="hero my-5 p-5">
+        <h3 class="text-center my-5 text-light">Have You Graduated Or Changed Your Career?</h3>
+        <div class="container d-flex justify-content-center gap-5 text-center">
+            <div>
+                <i class="bi bi-people border border-white rounded-circle p-3 px-4"></i>
+                <p class="mt-4">Enter jobior compion</p>
+            </div>
+            <div>
+                <i class="bi bi-journal-text border border-white rounded-circle p-3 px-4"></i>
+                <p class="mt-4">Get resume assessment</p>
+            </div>
+            <div>
+                <i class="bi bi-person-check border border-white rounded-circle p-3 px-4"></i>
+                <p class="mt-4">Search suitable recruiter</p>
+            </div>
+            <div>
+                <i class="bi bi-currency-dollar border border-white rounded-circle p-3 px-4"></i>
+                <p class="mt-4">Search salaries by major</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h3 class="text-center">Top Companies</h3>
+        <div>
+            <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
         </div>
     </section>
 
