@@ -34,25 +34,31 @@
             <div class="footer-column">
                 <h4>About Us</h4>
                 <ul>
-                    <li><a href="#">About Jobior</a></li>
+                    <li><a href="/about-us">About Jobior</a></li>
                     <li><a href="#">Work for Jobior</a></li>
                     <li><a href="#">Contact Us</a></li>
                 </ul>
+            </div>
+
+            <div class="footer-column">
                 <div class="app-buttons">
-                    <a href="#" class="app-btn">📱 Google Play</a>
-                    <a href="#" class="app-btn">🍎 App Store</a>
+                    <a href="#" class="app-btn"><i class="fsab fa-google-play"></i> Google Play</a>
+                    <a href="#" class="app-btn"><i class="fab fa-apple"></i> App Store</a>
                 </div>
             </div>
+
         </div>
+
+    </div>
     </div>
 
     <div class="footer-bottom">
         <div class="social-icons">
-            <a href="#">📘</a>
-            <a href="#">📸</a>
-            <a href="#">❌</a>
-            <a href="#">💼</a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <p>JayaFuture Copyright © 2024</p>
+        <p>JayaFuture Copyright © 2025</p>
     </div>
 </footer>
