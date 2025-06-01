@@ -106,3 +106,16 @@ footer {
     font-weight: medium;
     font-family: "Righteous";
 }
+
+.contact-us-banner {
+    background-image: url("/img/contactus.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: rgb(0, 0, 0);
+    height: 300px;
+}
+
+.contact-us-banner h3 {
+    font-size: 50px;
+}

@@ -30,7 +30,7 @@
                 <ul>
                     <li><a href="/about-us">About Jobior</a></li>
                     <li><a href="#">Work for Jobior</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/contact-us">Contact Us</a></li>
                 </ul>
             </div>
 
