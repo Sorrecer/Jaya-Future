@@ -1,6 +1,6 @@
 <nav>
     <section class="container d-flex justify-content-between align-items-center py-3">
-        <h4><a href="#" class="text-decoration-none">Jayafuture</a></h4>
+        <h4><a href="#" class="text-decoration-none font-righteous">Jayafuture</a></h4>
         <div class="d-flex align-items-center">
             <div class="px-3 border-end"><i class="bi bi-question-circle"></i></div>
             <div class="px-3 border-end">Employers</div>
