@@ -24,7 +24,7 @@ footer {
     gap: 60px;
     flex: 1;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .footer-column h4 {
@@ -86,4 +86,23 @@ footer {
     text-decoration: none;
     font-size: 18px;
     color: #333;
+}
+
+.aboutusbanner {
+    background-image: url("/img/aboutus.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    height: 300px;
+}
+
+.aboutdesc {
+    text-align: center;
+    margin: 50px 30% 50px 30%;
+}
+
+.aboutdesc p {
+    font-weight: medium;
+    font-family: "Righteous";
 }

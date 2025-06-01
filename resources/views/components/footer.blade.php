@@ -1,11 +1,5 @@
 <footer>
     <div class="footer-top">
-        <div class="footer-language">
-            <select>
-                <option>🇺🇸 United States (English)</option>
-                <!-- Tambah opsi lain jika perlu -->
-            </select>
-        </div>
         <div class="footer-columns">
             <div class="footer-column">
                 <h4>Company</h4>
