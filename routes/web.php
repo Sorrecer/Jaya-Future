@@ -18,3 +18,7 @@ Route::get('/signup', function () {
     return view('signup.signup-1');
 })->name('signup');
 
+
+Route::get('/companies', function () {
+    return view('companies');
+});

@@ -120,3 +120,12 @@ footer {
 .contact-us-banner h3 {
     font-size: 50px;
 }
+
+.tab-content h4 {
+    font-weight: bold;
+    color: #8e8e8e;
+}
+
+.card-body h6 {
+    font-weight: bold;
+}
