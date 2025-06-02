@@ -15,7 +15,7 @@ Route::get('/contact-us', function () {
 });
 
 Route::get('/signup', function () {
-    return view('signup.signup-1');
+    return view('signup');
 })->name('signup');
 
 
