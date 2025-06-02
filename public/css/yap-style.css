@@ -105,3 +105,41 @@ body{
   z-index: 2;
   background-image: url('/img/ornament.png');
 }
+
+.sign-up{
+    padding: 50px 150px;
+    position: relative;
+    height: 100vh;
+}
+.progress-bar {
+    background-color: #d4fce1;
+    height: 5px;
+}
+.progress-bar-fill {
+    background-color: var(--primary);
+    height: 5px;
+    width: 15%; /* Adjust this value to show progress */
+}
+.form-control::placeholder {
+    color: #ccc;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 30px;
+}
+
+.sign-up::after {
+    content: "";
+    position: absolute;
+    /* top: 30rem; */
+    bottom: 0;
+    right: 13rem;
+    width: 350px;
+    height: 350px;
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-image: url('/img/people.png');
+}

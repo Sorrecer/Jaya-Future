@@ -193,4 +193,6 @@
         </section>
 
     </main>
+
+    @include('components.footer')
 @endsection

@@ -47,7 +47,7 @@
     </div>
 
     {{-- Footer --}}
-    @include('components.footer')
+    {{-- @include('components.footer') --}}
 
 
 
