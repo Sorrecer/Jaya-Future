@@ -1,4 +1,4 @@
-<div>
+<div class="container mt-5 form-multi-step">
     {{-- multi step - 1 --}}
 
     @if ($currentStep == 1)
@@ -22,7 +22,7 @@
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" id="lastname">Last Name</label>
+                    <label class="lastname" id="lastname">Last Name</label>
                     <input type="text" name="lastname" class="form-control" placeholder="Write Your Last Name"
                         wire:model="lastname">
 
@@ -36,7 +36,7 @@
 
             <div class="row mb-4">
                 <div class="col-md-6">
-                    <label class="form-label" id="email">Email<span class="text-danger">*</span></label>
+                    <label class="email" id="email">Email<span class="text-danger">*</span></label>
                     <input type="email" name="email" class="form-control" placeholder="Your Email"
                         wire:model="email">
 
@@ -47,17 +47,14 @@
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Phone Number<span class="text-danger">*</span></label>
-                    <div class="input-group">
+                    <label class="phone">Phone Number<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" wire:model="phone">
 
-                        <input type="text" class="form-control" wire:model="phone">
-
-                        <span class="text-danger">
-                            @error('phone')
-                                {{ $message }}
-                            @enderror
-                        </span>
-                    </div>
+                    <span class="text-danger">
+                        @error('phone')
+                            {{ $message }}
+                        @enderror
+                    </span>
                 </div>
             </div>
         </form>
@@ -88,7 +85,7 @@
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" id="postal">Postal Code</label>
+                    <label class="postal" id="postal">Postal Code</label>
                     <input type="text" name="postal" class="form-control" wire:model="postal">
 
                     <span class="text-danger">
@@ -127,7 +124,7 @@
                     <p style="color: #aaa;">Amount is by rupiah</p>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" id="payment">Payment Period</label>
+                    <label class="payment" id="payment">Payment Period</label>
                     <input type="text" name="payment" class="form-control" wire:model="payment">
 
                     <span class="text-danger">

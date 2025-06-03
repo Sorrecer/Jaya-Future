@@ -109,7 +109,7 @@ body{
 .sign-up{
     padding: 50px 150px;
     position: relative;
-    height: 100vh;
+    height: 82vh;
 }
 .progress-bar {
     background-color: #d4fce1;
@@ -131,14 +131,20 @@ body{
     padding: 10px 30px;
 }
 
-/* .sign-up::after {
+.sign-up::after {
     content: "";
     position: absolute;
     bottom: 0;
     right: 13rem;
     width: 350px;
-    height: 350px;
+    height: 200px;
     z-index: 2;
     background-repeat: no-repeat;
+    background-size: cover;
     background-image: url('/img/people.png');
-} */
+}
+
+.form-multi-step {
+    min-height: 400px; /* atau sesuai kebutuhan */
+    position: relative;
+}

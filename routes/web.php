@@ -22,3 +22,4 @@ Route::get('/signup', function () {
 Route::get('/companies', function () {
     return view('companies');
 });
+
