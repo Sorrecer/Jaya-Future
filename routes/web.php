@@ -22,3 +22,6 @@ Route::get('/companies', function () {
     return view('companies');
 });
 
+Route::get('/jobs', function () {
+    return view('jobs');
+});
