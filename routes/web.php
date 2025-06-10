@@ -14,7 +14,11 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 });
 
-Route::get('/signup', function () {
+Route::get('/sign-in', function () {
+    return view('signin');
+})->name('signin');
+
+Route::get('/sign-up', function () {
     return view('signup');
 })->name('signup');
 

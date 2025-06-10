@@ -120,6 +120,16 @@ body{
     height: 5px;
     width: 15%; /* Adjust this value to show progress */
 }
+
+.form-control{
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
 .form-control::placeholder {
     color: #ccc;
 }
@@ -147,4 +157,23 @@ body{
 .form-multi-step {
     min-height: 400px; /* atau sesuai kebutuhan */
     position: relative;
+}
+
+.sign-in{
+    padding: 50px 150px;
+    position: relative;
+    height: 82vh;
+}
+
+.sign-in::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 13rem;
+    width: 350px;
+    height: 200px;
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('/img/signin.png');
 }
