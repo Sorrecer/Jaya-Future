@@ -29,3 +29,7 @@ Route::get('/companies', function () {
 Route::get('/jobs', function () {
     return view('jobs');
 });
+
+Route::get('/profile', function () {
+    return view('profile');
+});
