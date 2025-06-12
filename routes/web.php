@@ -29,12 +29,23 @@ Route::middleware('auth')->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', function () {
+        return view('profile');
+    })->name('profile');
+
+    Route::get('/submit-form', function () {
+        return view('upload-resume');
+    })->name('submit-form');
+
+    Route::get('/submitted', function () {
+        return view('submitted');
+    })->name('submitted');
 
     // logout 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Add more admin routes here
@@ -59,15 +70,3 @@ Route::get('/companies', function () {
 Route::get('/jobs', function () {
     return view('jobs');
 })->name('jobs');
-
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
-
-Route::get('/submit-form', function () {
-    return view('upload-resume');
-})->name('submit-form');
-
-Route::get('/submitted', function () {
-    return view('submitted');
-})->name('submitted');

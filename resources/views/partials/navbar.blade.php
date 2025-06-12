@@ -21,7 +21,7 @@
                         <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
                     </div>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="dropdown-item p-2" > My Profil</a></li>
+                        <li><a href="{{ route('profile') }}" class="dropdown-item p-2" > My Profil</a></li>
                         <li><button class="dropdown-item p-2" type="button"> Application</button></li>
                         <li>
                             <form action="{{ route('logout') }}" method="post">

@@ -36,7 +36,7 @@ class AuthController extends Controller
                 return redirect()->route('home')->with('success', 'Login successful');
             }
             // Jika role tidak dikenali, redirect ke halaman login dengan pesan error
-            return redirect()->route('login')->withErrors(['role' => 'Role not recognized']);
+            return redirect()->route('home')->withErrors(['role' => 'Role not recognized']);
         }
 
 
@@ -48,6 +48,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/');
     }
 }

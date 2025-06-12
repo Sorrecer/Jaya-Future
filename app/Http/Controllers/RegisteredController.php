@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Redirect;
 class RegisteredController extends Controller
 {
     //
+    public function view()
+    {
+        return view('register');
+    }
+
     public function store(Request $request) 
     {
         $request->validate([
@@ -45,7 +50,7 @@ class RegisteredController extends Controller
 
         Auth::login($user);
 
-        return Redirect::route('/sign-in')->with('success', 'Registration successful');
+        return Redirect::route('/register')->with('success', 'Registration successful');
 
 
     }
