@@ -1,10 +1,47 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RegisteredController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+// Authenticated routes
+Route::middleware('guest')->group(function () {
+
+    // login 
+
+    Route::get('/login', [AuthController::class, 'view'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+
+    // register
+
+    Route::get('/register', [RegisteredController::class, 'view'])->name('register');
+    Route::post('/register', [RegisteredController::class, 'register']);
+});
+
+Route::middleware('auth')->group(function () {
+
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // logout 
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Add more admin routes here
+
+});
+
+
 
 Route::get('/about-us', function () {
     return view('about-us');
@@ -14,13 +51,6 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 });
 
-Route::get('/sign-in', function () {
-    return view('signin');
-})->name('signin');
-
-Route::get('/sign-up', function () {
-    return view('signup');
-})->name('signup');
 
 Route::get('/companies', function () {
     return view('companies');
