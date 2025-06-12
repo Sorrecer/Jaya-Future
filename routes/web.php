@@ -48,10 +48,11 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('/jobs-admin', [DashboardController::class, 'index'])->name('jobs-admin');
+
     // Add more admin routes here
 
 });
-
 
 
 Route::get('/about-us', function () {
