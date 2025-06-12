@@ -66,4 +66,5 @@
         </form>
     </div>
 </main>
+@include('components.footer')
 @endsection

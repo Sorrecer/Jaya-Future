@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="{{ asset('css/ken-style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/yap-style.css') }}">
 
-    {{-- livewire --}}
-    @livewireStyles
-
     <!-- Bootstraps Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
@@ -34,13 +31,14 @@
     @include('partials.nav-signup')
 
     <div class="sign-in container">
-        <h2 class="fw-bold text-center mb-4 mt-5">Sign In</h2>
+        <h2 class="fw-bold mb-5` mt-5">Log in to your account to keep exploring jobs, internships, and training programs just for you.</h2>
 
-        <form class="mx-auto w-50">
+        <form class="w-50" method="POST" action="">
+            @csrf
             <div class="my-4">
-                <div class="">
+                <div>
                     <label class="email" id="email">Email</label>
-                    <input type="email" name="email" class="form-control " placeholder="Write Your Email" autocomplete="off">
+                    <input type="email" name="email" class="form-control" placeholder="Write Your Email" value="{{ old('email') }}" autocomplete="email">
 
                     <span class="text-danger">
                         @error('email')
@@ -51,9 +49,9 @@
             </div>
 
             <div class="my-4">
-                <div class="">
-                    <label class="password" id="password">password<span class="text-danger">*</span></label>
-                    <input type="password" name="password" class="form-control" placeholder="Your password" autocomplete="off">
+                <div>
+                    <label class="password" id="password">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Your password" autocomplete="current-password">
 
                     <span class="text-danger">
                         @error('password')
@@ -63,12 +61,12 @@
                 </div>
                 
             </div>
-            <button type="submit" class="btn btn-primary">Sign In</button>
+            <button type="submit" name="submit" class="btn btn-primary">Sign In</button>
         </form>
     </div>
 
     
-    @livewireScripts
+    
 </body>
 
 </html>

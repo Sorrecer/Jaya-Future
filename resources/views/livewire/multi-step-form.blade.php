@@ -9,7 +9,10 @@
         <h2 class="fw-bold mb-4 pe-4">Give Us Your Primary Information</h2>
 
         <form wire:submit.prevent="signup">
+            @csrf
+
             <div class="row mb-3">
+                {{-- Name  --}}
                 <div class="col-md-6">
                     <label class="name" id="name">Name</label>
                     <input type="text" name="name" class="form-control" placeholder="Write Your Name"
@@ -21,6 +24,7 @@
                         @enderror
                     </span>
                 </div>
+                
                 <div class="col-md-6">
                     <label class="lastname" id="lastname">Last Name</label>
                     <input type="text" name="lastname" class="form-control" placeholder="Write Your Last Name"
