@@ -34,4 +34,9 @@ class DashboardController extends Controller
     {
         return view('admin.post-submitted');
     }
+
+    public function applicant()
+    {
+        return view('admin.applicant');
+    }
 }
