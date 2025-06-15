@@ -10,9 +10,22 @@ class ProgramController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function internship()
     {
         //
+        return view('admin.internship');
+    }
+
+    public function job()
+    {
+        //
+        return view('admin.jobs');
+    }
+
+    public function training()
+    {
+        //
+        return view('admin.training');
     }
 
     /**

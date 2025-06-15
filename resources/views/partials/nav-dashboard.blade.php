@@ -39,9 +39,9 @@
         </div>
     </section>
     <section class="nav d-flex justify-content-center py-3 border">
-        <div class="px-4">Dashboard</div>
-        <div class="px-4">Intership</div>
-        <div class="px-4">Job</div>
-        <div class="px-4">Training</div>
+        <a href="{{ route('admin.dashboard') }}" class="text-dark px-4">Dashboard</a>
+        <a href="{{ route('admin.internship') }}" class="text-dark px-4">Intership</a>
+        <a href="{{ route('admin.jobs') }}" class="text-dark px-4">Job</a>
+        <a href="{{ route('admin.training') }}" class="text-dark px-4">Training</a>
     </section>
 </nav>
