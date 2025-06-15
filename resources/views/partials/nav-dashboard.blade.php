@@ -33,25 +33,7 @@
 
                         </ul>
                     </div>
-
-                    <div class="pe-3 ">Halo, {{ Auth::user()->name }}</div>
-                    <div class="dropdown">
-                        <div class="rounded-circle overflow-hidden border dropdown" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="width: 40px; height: 40px;">
-                            <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('profile') }}" class="dropdown-item p-2" > My Profil</a></li>
-                            <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item p-2" type="button"> Dashboard</a></li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Sign Out</button>
-                                </form>
-                            </li>
-
-                        </ul>
-                    </div>
+                    
             @endauth
 
         </div>
