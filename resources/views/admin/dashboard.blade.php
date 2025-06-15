@@ -61,7 +61,6 @@
             Culpa a ab enim blanditiis. Necessitatibus cum exercitationem eius sequi explicabo facilis quas provident sunt, earum, perferendis perspiciatis sint adipisci quaerat aliquam officia. Quod nam exercitationem beatae assumenda, quaerat cumque?
             Optio non, quaerat mollitia, quae dicta enim, deserunt magnam earum corrupti et consectetur nobis maiores! Possimus eveniet atque mollitia odit non, quas officiis ea ipsum repellat! Nostrum aliquam officia praesentium!
             Ut, officia consequatur repudiandae quos porro quia ducimus ullam quod quaerat iure hic, accusantium quisquam, corrupti adipisci dignissimos et temporibus. Dolore placeat aliquam eveniet id delectus incidunt suscipit quas distinctio!</p>
-
         @yield('container')
 
     </div>

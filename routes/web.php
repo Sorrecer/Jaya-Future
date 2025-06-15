@@ -20,7 +20,9 @@ Route::middleware('guest')->group(function () {
 
     // register
 
-    Route::get('/register',function(){return view('register');})->name('register');
+    Route::get('/register', function () {
+        return view('register');
+    })->name('register');
 });
 
 Route::middleware('auth')->group(function () {
@@ -46,7 +48,14 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/jobs-admin', [DashboardController::class, 'jobsAdmin'])->name('jobs-admin');
 
+    Route::get('/post1', [DashboardController::class, 'post1'])->name('post1');
+    Route::get('/post2', [DashboardController::class, 'post2'])->name('post2');
+    Route::get('/post3', [DashboardController::class, 'post3'])->name('post3');
+    Route::get('/post-submitted', [DashboardController::class, 'postSubmitted'])->name('post-submitted');
+
+    Route::get('/applicant', [DashboardController::class, 'applicant'])->name('applicant');
     // Add more admin routes here
 
     Route::get('/jobs-admin', [DashboardController::class, 'jobsAdmin'])->name('jobs-admin');
