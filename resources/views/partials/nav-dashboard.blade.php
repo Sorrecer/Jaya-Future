@@ -1,6 +1,6 @@
 <nav>
     <section class="container d-flex justify-content-between align-items-center py-3">
-        <h4><a href="{{ route('home') }}" class="text-decoration-none font-righteous">Jayafuture</a></h4>
+        <h4><a href="{{ route('admin.dashboard') }}" class="text-decoration-none font-righteous">Jayafuture</a></h4>
         <div class="d-flex align-items-center gap-3">
             <div class="pe-3 border-end"><i class="bi bi-question-circle"></i></div>
 
@@ -14,24 +14,44 @@
             @endguest
 
             @auth
-                <div class="pe-3 ">Halo, {{ Auth::user()->name }}</div>
-                <div class="dropdown">
-                    <div class="rounded-circle overflow-hidden border dropdown" data-bs-toggle="dropdown"
-                        aria-expanded="false" style="width: 40px; height: 40px;">
-                        <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
-                    </div>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('profile') }}" class="dropdown-item p-2" > My Profil</a></li>
-                        <li><button class="dropdown-item p-2" type="button"> Application</button></li>
-                        <li>
-                            <form action="{{ route('logout') }}" method="post">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Sign Out</button>
-                            </form>
-                        </li>
+                            
+                    <div class="pe-3 ">Halo, {{ Auth::user()->name }}</div>
+                    <div class="dropdown">
+                        <div class="rounded-circle overflow-hidden border dropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="width: 40px; height: 40px;">
+                            <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('profile') }}" class="dropdown-item p-2" > My Profil</a></li>
+                            <li><button class="dropdown-item p-2" type="button"> Application</button></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Sign Out</button>
+                                </form>
+                            </li>
 
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+
+                    <div class="pe-3 ">Halo, {{ Auth::user()->name }}</div>
+                    <div class="dropdown">
+                        <div class="rounded-circle overflow-hidden border dropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="width: 40px; height: 40px;">
+                            <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('profile') }}" class="dropdown-item p-2" > My Profil</a></li>
+                            <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item p-2" type="button"> Dashboard</a></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Sign Out</button>
+                                </form>
+                            </li>
+
+                        </ul>
+                    </div>
             @endauth
 
         </div>

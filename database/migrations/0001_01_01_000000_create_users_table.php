@@ -18,7 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('education');
-            $table->date('birdth_date');
+            $table->date('birth_date');
+            $table->string('about')->nullable();
             $table->string('university')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('profile_picture')->nullable();

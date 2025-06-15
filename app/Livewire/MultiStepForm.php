@@ -2,21 +2,29 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class MultiStepForm extends Component
 {
-    public $name;
-    public $lastname;
-    public $email;
-    public $phone;
-    public $city;
-    public $postal;
-    public $salary;
-    public $payment;
-    public $offer;
 
-    public $totalSteps = 4;
+    use WithFileUploads;
+
+    public $name;
+    public $password;
+    public $birth_date;
+    public $email;
+    public $phone_number;
+    public $about;
+    public $profile_picture;
+    public $education;
+    public $university;
+
+    public $totalSteps = 3;
     public $currentStep = 1;
 
     public function mount()
@@ -28,7 +36,7 @@ class MultiStepForm extends Component
     {
         // lanjut ke halaman berikutnya settelah validasi data
         $this->resetErrorBag(); // Reset error messages
-        $this->validateData();
+        $this->register();
         if ($this->currentStep < $this->totalSteps) {
             $this->currentStep++;
         }
@@ -47,36 +55,50 @@ class MultiStepForm extends Component
         return view('livewire.multi-step-form');
     }
 
-    public function validateData()
+    public function register()
     {
         if ($this->currentStep == 1) {
 
             $this->validate([
                 'name' => 'required|string|max:255',
-                'lastname' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
-                'phone' => 'required|string|max:15',
+                'birth_date' => 'required|date',
+                'password' => 'required|string',
             ]);
         } elseif ($this->currentStep == 2) {
             $this->validate([
-                'city' => 'required|string|max:255',
-                'postal' => 'required|numeric|max:5',
+                'about' => 'nullable|string|max:500',
+                'profile_picture' => 'nullable|image|max:1024', // 1MB max
             ]);
+            if ($this->hasFile('profile_picture')) {
+                $this->file('profile_picture')->store('profile_pictures', 'public');
+            } else {
+                $this->file('img/default.jpg');
+            }
         } elseif ($this->currentStep == 3) {
             $this->validate([
-                'salary' => 'required|numeric|min:0',
-                'payment' => 'required|string|max:50',
+                'phone_number' => 'nullable|string|max:15',
+                'education' => 'required|string|max:255',
+                'university' => 'nullable|string|max:255',
             ]);
-        } 
+        }
+
+        User::Create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+            'education' => $this->education,
+            'birth_date' => $this->birth_date,
+            'university' => $this->university,
+            'phone_number' => $this->phone_number,
+            'profile_picture' => $this->profile_picture,
+        ]);
+        
+        return redirect()->route('login')->with('success', 'Registration successful');
     }
 
     public function submit()
     {
         $this->resetErrorBag();
-        if ($this->currentStep == 4) {
-            $this->validate([
-                'offer' => 'required|string|max:500',
-            ]);
-        }
     }
 }
