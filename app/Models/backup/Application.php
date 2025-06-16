@@ -8,18 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'user_id',
-        'job_id',
-        'name',
-        'email',
-        'phone_number',
-        'cv',
-        'additional_file',
-        'cover_letter',
+        'program_id',
         'status',
-        'application_date'
+        'resume',
+        'submission_date',
     ];
 
     public function user()
@@ -27,8 +21,9 @@ class Application extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function job()
+    public function program()
     {
-        return $this->belongsTo(Job::class);
+        return $this->belongsTo(Program::class);
     }
+
 }
