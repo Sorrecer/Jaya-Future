@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
                 'birth_date' => '2000-01-01',
                 'university' => 'Universitas Contoh',
                 'phone_number' => '08123456789',
-                'profile_picture' => 'img/default.png',
+                'profile_picture' => 'img/default.jpg',
                 'role' => 'admin'
 
             ]

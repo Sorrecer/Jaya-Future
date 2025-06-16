@@ -22,6 +22,8 @@
             <button class="btn btn-outline-secondary rounded-pill px-3">Marked</button>
             <button class="btn btn-outline-secondary rounded-pill px-3">Open And Paused</button>
         </div>
+        
+        <a href="#" class="text-dark btn btn-outline-secondary rounded-pill px-3"> + Add Training</a>
 
         <div>
             <select class="form-select rounded-pill">

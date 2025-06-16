@@ -23,6 +23,8 @@
             <button class="btn btn-outline-secondary rounded-pill px-3">Open And Paused</button>
         </div>
 
+        <a href="#" class="text-dark btn btn-outline-secondary rounded-pill px-3"> + Add Job</a>
+
         <div>
             <select class="form-select rounded-pill">
                 <option>Applicants</option>
