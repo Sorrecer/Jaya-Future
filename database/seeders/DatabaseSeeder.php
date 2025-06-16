@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Seed Users
-        User::factory(10)->create();
+        // User::factory(10)->create();
+        $this->call(AdminSeeder::class);
 
         // Seed Tags
         $tags = Tag::factory(10)->create();

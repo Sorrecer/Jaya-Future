@@ -16,18 +16,17 @@ class AdminSeeder extends Seeder
     {
         //
         User::Create(
-        [
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('123'),
-            'education' => 'S1',
-            'birth_date' => '2000-01-01',
-            'about' => 'Ini adalah akun admin untuk mengelola aplikasi.',
-            'university' => 'Universitas Contoh',
-            'phone_number' => '08123456789',
-            'profile_picture' => 'img/default.png',
-            'role' => 'admin',
-        ]
-    );
+            [
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('123'),
+                'birth_date' => '2000-01-01',
+                'university' => 'Universitas Contoh',
+                'phone_number' => '08123456789',
+                'profile_picture' => 'img/default.png',
+                'role' => 'admin'
+
+            ]
+        );
     }
 }
