@@ -15,14 +15,16 @@ class MultiStepForm extends Component
     use WithFileUploads;
 
     public $name;
+    public $email;
     public $password;
     public $birth_date;
-    public $email;
-    public $phone_number;
-    public $about;
-    public $profile_picture;
-    public $education;
     public $university;
+    public $phone_number;
+    public $profile_picture;
+    public $employment_status;
+    public $job_title;
+    public $location;
+    public $resume;
 
     public $totalSteps = 3;
     public $currentStep = 1;
@@ -36,7 +38,6 @@ class MultiStepForm extends Component
     {
         // lanjut ke halaman berikutnya settelah validasi data
         $this->resetErrorBag(); // Reset error messages
-        $this->validate('name'); // Validate the current step's fields
         if ($this->currentStep < $this->totalSteps) {
             $this->currentStep++;
         }
@@ -60,38 +61,46 @@ class MultiStepForm extends Component
         if ($this->currentStep == 1) {
 
             $this->validate([
-                'name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
-                'birth_date' => 'required|date',
                 'password' => 'required|string',
             ]);
         } elseif ($this->currentStep == 2) {
             $this->validate([
-                'about' => 'nullable|string|max:500',
-                'profile_picture' => 'nullable|image|max:1024', // 1MB max
+                'profile_picture' => 'nullable|image|max:1024|mimes:png,jpg', // 1MB max
+                'name' => 'required|string|max:255',
+                'birth_date' => 'required|date',
+                'location' => 'nullable|string|max:255',
             ]);
-            if ($this->hasFile('profile_picture')) {
-                $this->file('profile_picture')->store('profile_pictures', 'public');
+            if ($this->profile_picture) {
+                $picturePath = $this->profile_picture->store('profile_pictures', 'public');
             } else {
-                $this->file('img/default.jpg');
+                $picturePath = 'img/default.jpg'; // Default profile picture
             }
         } elseif ($this->currentStep == 3) {
             $this->validate([
                 'phone_number' => 'nullable|string|max:15',
-                'education' => 'required|string|max:255',
                 'university' => 'nullable|string|max:255',
+                'employment_status' => 'nullable|string|max:255',
+                'job_title' => 'nullable|string|max:255',
+                'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // 2MB max
             ]);
+            if ($this->resume) {
+                $resumePath = -$this->resume->store('resumes', 'public');
+            }
         }
 
         User::Create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'education' => $this->education,
             'birth_date' => $this->birth_date,
             'university' => $this->university,
             'phone_number' => $this->phone_number,
+            'employment_status' => $this->employment_status,
+            'job_title' => $this->job_title,
+            'location' => $this->location,
             'profile_picture' => $this->profile_picture,
+            'resume' => $this->resume,
         ]);
         
         return redirect()->route('login')->with('success', 'Registration successful');

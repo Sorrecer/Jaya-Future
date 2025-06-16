@@ -11,32 +11,9 @@
                 <div class="progress-bar-fill rounded-pill" style="width:33%;"></div>
             </div>
 
-            <h2 class="fw-bold mb-4 pe-4">Give Us Your Primary Information</h2>
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="name" id="name">Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Write Your Name"
-                        wire:model="name">
-
-                    <span class="text-danger">
-                        @error('name')
-                            {{ $message }}
-                        @enderror
-                    </span>
-                </div>
-
-                <div class="col-md-6">
-                    <label class="birth_date" id="birth_date">Birth Date</label>
-                    <input type="date" name="birth_date" class="form-control" wire:model="birth_date">
-
-                    <span class="text-danger">
-                        @error('birth_date')
-                            {{ $message }}
-                        @enderror
-                    </span>
-                </div>
-            </div>
+            <h2 class="fw-bold mb-4 pe-4">Create Your Account</h2>
+            <p style="color: #aaa; width:50%;">Join us to explore job opportunities, internships, and training programs
+                tailored just for you.</p>
 
             <div class="row mb-4">
                 <div class="col-md-6">
@@ -70,18 +47,41 @@
                 <div class="progress-bar-fill rounded-pill" style="width:66%;"></div>
             </div>
 
-            <h2 class="fw-bold mb-4">"Tell Us What Makes You a Great Candidate"</h2>
-            <p style="color: #aaa; width:50%;">We use this to know about you and what yours interest</p>
+            <h2 class="fw-bold mb-4">"Give Us Your Primary Information"</h2>
+            <p style="color: #aaa; width:50%;">We use this to know location you and what yours interest</p>
 
-            @csrf
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="about" id="about">About</label>
-                    <textarea class="form-control" name="about" id="about" rows="6" placeholder="Write about you.."
-                        wire:model="about"></textarea>
+                    <label class="name" id="name">Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Write Your Name"
+                        wire:model="name">
 
                     <span class="text-danger">
-                        @error('about')
+                        @error('name')
+                            {{ $message }}
+                        @enderror
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="birth_date" id="birth_date">Birth Date</label>
+                    <input type="date" name="birth_date" class="form-control" wire:model="birth_date">
+
+                    <span class="text-danger">
+                        @error('birth_date')
+                            {{ $message }}
+                        @enderror
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="location" id="location">location</label>
+                    <input type="text" class="form-control" name="location" id="location" rows="6"
+                        placeholder="Write location you.." wire:model="location"></input>
+
+                    <span class="text-danger">
+                        @error('location')
                             {{ $message }}
                         @enderror
                     </span>
@@ -93,6 +93,16 @@
 
                     <span class="text-danger">
                         @error('profile_picture')
+                            {{ $message }}
+                        @enderror
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label class="phone_number">Phone Number</label>
+                    <input type="text" class="form-control" placeholder="Your Number" wire:model="phone_number">
+
+                    <span class="text-danger">
+                        @error('phone_number')
                             {{ $message }}
                         @enderror
                     </span>
@@ -112,21 +122,13 @@
 
             <p style="color: #aaa;">We use this to match you nearby offers.</p>
 
-            @csrf
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="education" id="education">Education</label>
-                    <select wire:model="education" name="tingkat_pendidikan" id="tingkat_pendidikan" class="form-select">
-                        <option value="">-- Pilih Tingkat Pendidikan --</option>
-                        <option value="SMA">SMA/SMK</option>
-                        <option value="D3">D3</option>
-                        <option value="S1">S1</option>
-                        <option value="S2">S2</option>
-                        <option value="S3">S3</option>
-                    </select>
+                    <label class="job_title" id="job_title">Job</label>
+                    <input type="text" name="job_title" class="form-control" wire:model="job_title">
 
                     <span class="text-danger">
-                        @error('education')
+                        @error('job_title')
                             {{ $message }}
                         @enderror
                     </span>
@@ -141,12 +143,27 @@
                         @enderror
                     </span>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="password">Phone Number<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="Your Number" wire:model="password">
+                    <label class="employment_status" id="employment_status">Employment Status</label>
+                    <select wire:model="employment_status" name="employment_status" id="employment_status">
+                        <option value="employed">Employed</option>
+                        <option value="not_employed">Not Employed</option>
+                    </select>
+                    
+                    <span class="text-danger">
+                        @error('employment_status')
+                            {{ $message }}
+                        @enderror
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label class="resume" id="resume">Resume</label>
+                    <input type="file" name="resume" class="form-control" wire:model="resume">
 
                     <span class="text-danger">
-                        @error('password')
+                        @error('resume')
                             {{ $message }}
                         @enderror
                     </span>
