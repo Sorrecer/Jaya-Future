@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class internshipController extends Controller
@@ -31,6 +32,39 @@ class internshipController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'company_name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'categoty' => 'required|string|max:255',
+            'job_type' => 'required|in:On Site,Hybrid,Remote',
+            'requirement' => 'required|string',
+            'benefit' => 'required|string',
+            'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('company_logo')) {
+            $request->validate([
+                'company_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+        }
+
+        Job::Create([
+            'title' => $request->title,
+            'job_kind' => 'Internship',
+            'company_name' => $request->company_name,
+            'location' => $request->location,
+            'category' => $request->categoty,
+            'job_type' => $request->job_type,
+            'description' => $request->description,
+            'requirement' => $request->requirement,
+            'benefit' => $request->benefit,
+            'company_logo' => $request->file('company_logo')->store('logos', 'public'),
+        ]);
+        
+
+
     }
 
     /**

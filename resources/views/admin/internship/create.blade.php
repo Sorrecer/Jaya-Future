@@ -8,6 +8,11 @@
             <div class="mb-4">
                 <label for="title" class="form-label">Internship Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Write Internship Title" value="{{ old('title') }}">
+                <span class="text-danger">
+                        @error('title')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">
@@ -18,16 +23,31 @@
                 <label for="company_name" class="form-label">Company Name</label>
                 <input type="text" class="form-control" id="company_name" name="company_name"
                     placeholder="Write Company Name" value="{{ old('company_name') }}">
+                    <span class="text-danger">
+                        @error('company_name')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">
                 <label for="location" class="form-label">Location</label>
                 <input type="text" class="form-control" id="location" name="location" placeholder="Write Internship Location" value="{{ old('location') }}">
+                <span class="text-danger">
+                        @error('location')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">
                 <label for="category" class="form-label">Category</label>
                 <input type="text" class="form-control" id="category" name="category">
+                <span class="text-danger">
+                        @error('category')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">
@@ -52,23 +72,43 @@
                 <label for="description" class="form-label">Internship Description</label>
                 <textarea class="form-control" id="description" name="description" rows="10" style="min-height: 200px;"
                     placeholder="Internship Description">{{ old('description') }}</textarea>
+                    <span class="text-danger">
+                        @error('description')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">
                 <label for="requirement" class="form-label">Requirement</label>
                 <textarea class="form-control" id="requirement" name="requirement" rows="10" style="min-height: 200px;"
                     placeholder="Write Internship Requirement">{{ old('requirement') }}</textarea>
+                    <span class="text-danger">
+                        @error('requirement')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">
                 <label for="benefit" class="form-label">Benefits</label>
                 <textarea class="form-control" id="benefit" name="benefit" rows="10" style="min-height: 200px;"
                     placeholder="Write Internship Benefits">{{ old('benetif') }}</textarea>
+                    <span class="text-danger">
+                        @error('benefit')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">
                 <label for="company_logo" class="form-label">Company Logo</label>
                 <input type="file" class="form-control" id="company_logo" name="company_logo">
+                <span class="text-danger">
+                        @error('company_logo')
+                            {{ $message }}
+                        @enderror
+                    </span>
             </div>
 
             <div class="mb-4">

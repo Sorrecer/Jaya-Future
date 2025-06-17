@@ -1,7 +1,7 @@
 <div class="container mt-5 form-multi-step">
 
 
-    <form wire:submit.prevent="register" method="post" enctype="multipart/form-data">
+    <form wire:submit.prevent="submitForm" method="post" enctype="multipart/form-data">
         @csrf
 
         {{-- multi step - 1 --}}
