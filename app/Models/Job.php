@@ -24,6 +24,11 @@ class Job extends Model
         'status'
     ];
 
+    protected $casts = [
+        'date_posted' => 'date',
+    ];
+
+
     public function applications()
     {
         return $this->hasMany(Application::class);
