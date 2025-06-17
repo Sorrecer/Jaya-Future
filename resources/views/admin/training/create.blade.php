@@ -1,58 +1,86 @@
 @extends('layout.dashboard')
 
 @section('container')
-<div class="container my-5" style="max-width: 700px;">
-    <h2 class="my-5">Company Information</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
-        @csrf
-
-        <div class="mb-5">
-            <label for="founded_year" class="form-label">Founded Year*</label>
-            <select class="form-select" id="founded_year" name="founded_year">
-                <option value="">Select Founded Year</option>
-                @for ($year = date('Y'); $year >= 1900; $year--)
-                <option value="{{ $year }}">{{ $year }}</option>
-                @endfor
-            </select>
-        </div>
-
-        <div class="mb-5">
-            <label for="company_size" class="form-label">Company Size*</label>
-            <select class="form-select" id="company_size" name="company_size">
-                <option value="">Select Company Size</option>
-                <option value="1-50">1-50</option>
-                <option value="51-200">51-200</option>
-                <option value="201-500">201-500</option>
-                <option value="500+">500+</option>
-            </select>
-        </div>
-
-        <div class="mb-5">
-            <label for="logo" class="form-label">Upload Your Logo*</label>
-            <input class="form-control" type="file" id="logo" name="logo" accept="image/*">
-        </div>
-
-        <div class="mb-5">
-            <label for="other_branches" class="form-label">Other Branches Of Office</label>
-            <select class="form-select" id="other_branches" name="other_branches">
-                <option value="">Select Branch Size</option>
-                <option value="1-50">1-50</option>
-                <option value="51-200">51-200</option>
-                <option value="201-500">201-500</option>
-                <option value="500+">500+</option>
-            </select>
-        </div>
-
-        <div class="mb-5">
-            <label class="form-label">Company Locations</label>
-            <div class="d-flex flex-wrap gap-2">
-                <span class="badge rounded-pill bg-light text-dark border">Milan</span>
-                <span class="badge rounded-pill bg-light text-dark border">Berlin</span>
-                <span class="badge rounded-pill bg-light text-dark border">Florance</span>
+    <div class="container my-5" style="max-width: 700px;">
+        <h2 class="my-5">Add Training Information</h2>
+        <form action="" method="POST"  enctype="multipart/form-data">
+            @csrf
+            <div class="mb-4">
+                <label for="title" class="form-label">Training Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Write Training Title" value="{{ old('title') }}">
             </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary">Continue</button>
-    </form>
-</div>
+            <div class="mb-4">
+                <input type="hidden" class="form-control" name="job_kind" value="Training">
+            </div>
+
+            <div class="mb-4">
+                <label for="company_name" class="form-label">Company Name</label>
+                <input type="text" class="form-control" id="company_name" name="company_name"
+                    placeholder="Write Company Name" value="{{ old('company_name') }}">
+            </div>
+
+            <div class="mb-4">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Write Training Location" value="{{ old('location') }}">
+            </div>
+
+            <div class="mb-4">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" class="form-control" id="category" name="category">
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Training Type</label>
+                <div class="d-flex flex-wrap gap-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="job_type" id="on_site" value="On Site">
+                        <label class="form-check-label" for="on_site">On Site</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="job_type" id="hybrid" value="Hybrid">
+                        <label class="form-check-label" for="hybrid">Hybrid</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="job_type" id="remote" value="Remote">
+                        <label class="form-check-label" for="remote">Remote</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="description" class="form-label">Training Description</label>
+                <textarea class="form-control" id="description" name="description" rows="10" style="min-height: 200px;"
+                    placeholder="Training Description">{{ old('description') }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="requirement" class="form-label">Requirement</label>
+                <textarea class="form-control" id="requirement" name="requirement" rows="10" style="min-height: 200px;"
+                    placeholder="Write Training Requirement">{{ old('requirement') }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="benefit" class="form-label">Benefits</label>
+                <textarea class="form-control" id="benefit" name="benefit" rows="10" style="min-height: 200px;"
+                    placeholder="Write Training Benefits">{{ old('benetif') }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="company_logo" class="form-label">Company Logo</label>
+                <input type="file" class="form-control" id="company_logo" name="company_logo">
+            </div>
+
+            <div class="mb-4">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="Open" selected>Open</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Paused">Paused</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Continue</button>
+        </form>
+    </div>
 @endsection

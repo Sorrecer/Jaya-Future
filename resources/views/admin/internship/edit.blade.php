@@ -2,16 +2,16 @@
 
 @section('container')
     <div class="container my-5" style="max-width: 700px;">
-        <h2 class="my-5">Add Job Information</h2>
+        <h2 class="my-5">Edit Internship</h2>
         <form action="" method="POST"  enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
-                <label for="title" class="form-label">Job Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Write Job Title" value="{{ old('title') }}">
+                <label for="title" class="form-label">Internship Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Write Internship Title" value="{{ old('title') }}">
             </div>
 
             <div class="mb-4">
-                <input type="hidden" class="form-control" name="job_kind" value="Job">
+                <input type="hidden" class="form-control" name="job_kind" value="Internship">
             </div>
 
             <div class="mb-4">
@@ -22,7 +22,7 @@
 
             <div class="mb-4">
                 <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" name="location" placeholder="Write Job Location" value="{{ old('location') }}">
+                <input type="text" class="form-control" id="location" name="location" placeholder="Write Internship Location" value="{{ old('location') }}">
             </div>
 
             <div class="mb-4">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="mb-4">
-                <label class="form-label">Job Type</label>
+                <label class="form-label">Internship Type</label>
                 <div class="d-flex flex-wrap gap-2">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="job_type" id="on_site" value="On Site">
@@ -49,21 +49,21 @@
             </div>
 
             <div class="mb-4">
-                <label for="description" class="form-label">Job Description</label>
+                <label for="description" class="form-label">Internship Description</label>
                 <textarea class="form-control" id="description" name="description" rows="10" style="min-height: 200px;"
-                    placeholder="Job Description">{{ old('description') }}</textarea>
+                    placeholder="Internship Description">{{ old('description') }}</textarea>
             </div>
 
             <div class="mb-4">
                 <label for="requirement" class="form-label">Requirement</label>
                 <textarea class="form-control" id="requirement" name="requirement" rows="10" style="min-height: 200px;"
-                    placeholder="Write Job Requirement">{{ old('requirement') }}</textarea>
+                    placeholder="Write Internship Requirement">{{ old('requirement') }}</textarea>
             </div>
 
             <div class="mb-4">
                 <label for="benefit" class="form-label">Benefits</label>
                 <textarea class="form-control" id="benefit" name="benefit" rows="10" style="min-height: 200px;"
-                    placeholder="Write Job Benefits">{{ old('benetif') }}</textarea>
+                    placeholder="Write Internship Benefits">{{ old('benetif') }}</textarea>
             </div>
 
             <div class="mb-4">
