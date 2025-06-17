@@ -7,7 +7,7 @@
         </div>
     </section>
     <section class="nav d-flex justify-content-center py-3 border">
-        <div class="px-4">Jobs</div>
+        <a href="{{ route('jobs') }}" class="px-4">Jobs</a>
         <div class="px-4">Scholarship</div>
         <div class="px-4">Create CV</div>
     </section>

@@ -2,64 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Application;
+use App\Models\Job;
 
 class ApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function showForm($jobId)
     {
-        //
+        $job = Job::findOrFail($jobId);
+        return view('submit-form', compact('job'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'phone_number' => 'required|string|max:20',
+            'cv' => 'required|file|mimes:pdf,doc,docx',
+            'additional_file' => 'nullable|file|mimes:pdf,doc,docx',
+            'cover_letter' => 'nullable|string',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Application $application)
-    {
-        //
-    }
+        $cvPath = $request->file('cv')->store('applications/cv', 'public');
+        $additionalPath = $request->file('additional_file') ?
+            $request->file('additional_file')->store('applications/other', 'public') :
+            null;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Application $application)
-    {
-        //
-    }
+        Application::create([
+            'user_id' => Auth::id(),
+            'job_id' => $request->job_id,
+            'name' => $request->name . ' ' . $request->last_name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'cv' => $cvPath,
+            'additional_file' => $additionalPath,
+            'cover_letter' => $request->cover_letter,
+            'status' => 'In Review',
+            'application_date' => now(),
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Application $application)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Application $application)
-    {
-        //
+        return redirect()->back()->with('success', 'Application submitted successfully!');
     }
 }

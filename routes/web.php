@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InternshipController;
@@ -28,6 +29,10 @@ Route::get('/companies', function () {
 })->name('companies');
 
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+Route::get('/submit-form/{job}', [ApplicationController::class, 'showForm'])->name('application.form');
+Route::post('/submit-form', [ApplicationController::class, 'store'])->name('application.submit');
+
 
 // Authenticated routes
 Route::middleware('guest')->group(function () {

@@ -32,7 +32,7 @@
                                 <small class="text-muted">{{ $selectedJob->location }} • {{ $selectedJob->job_type }}</small>
                             </div>
                         </div>
-                        <button class="btn btn-outline-dark">Apply Now</button>
+                        <a href="{{ route('application.form', ['job' => $job->id]) }}" class="btn btn-outline-dark">Apply Now</a>
                     </div>
 
                     <ul class="nav nav-tabs mt-4">

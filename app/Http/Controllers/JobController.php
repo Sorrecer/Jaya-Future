@@ -40,8 +40,10 @@ class jobController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $job = Job::findOrFail($id);
+        return view('job-detail', compact('job'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
