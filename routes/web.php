@@ -71,6 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('job', JobController::class);
     Route::resource('training', TrainingController::class);
 
+
     // Job Opportunities management
     Route::get('/post-submitted', [DashboardController::class, 'postSubmitted'])->name('post-submitted');
     Route::get('/applicant', [DashboardController::class, 'applicant'])->name('applicant');

@@ -25,7 +25,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset($selectedJob->company_logo ?? 'img/logo-default.png') }}" alt="Logo" width="60" class="me-3 rounded-circle">
+                            <img src="{{ asset('storage/' . $selectedJob->company_logo) }}" alt="Logo" width="60" class="me-3 rounded-circle">
+
                             <div>
                                 <h5 class="fw-bold mb-1">{{ $selectedJob->title }}</h5>
                                 <p class="text-muted mb-0">{{ $selectedJob->company_name }}</p>
