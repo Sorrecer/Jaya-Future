@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Job;
+
 
 class jobController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        //
-        return view('admin.job.index');
-        
+        $jobs = Job::latest()->get();  // Atau tambahkan where status = 'Open' jika mau filter
+        return view('jobs', compact('jobs'));
     }
 
     /**

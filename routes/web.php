@@ -26,9 +26,7 @@ Route::get('/companies', function () {
     return view('companies');
 })->name('companies');
 
-Route::get('/jobs', function () {
-    return view('jobs');
-})->name('jobs');
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 
 // Authenticated routes
 Route::middleware('guest')->group(function () {
@@ -38,7 +36,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 
     // register
-    Route::get('/register',function(){return view('register');})->name('register');
+    Route::get('/register', function () {
+        return view('register');
+    })->name('register');
 });
 
 Route::middleware('auth')->group(function () {
@@ -66,16 +66,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // dashboard 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/jobs-admin', [DashboardController::class, 'jobsAdmin'])->name('jobs-admin');
-    Route::resource('internship',InternshipController::class);
-    Route::resource('job',JobController::class);
-    Route::resource('training',TrainingController::class);
+    Route::resource('internship', InternshipController::class);
+    Route::resource('job', JobController::class);
+    Route::resource('training', TrainingController::class);
 
     // Job Opportunities management
     Route::get('/post-submitted', [DashboardController::class, 'postSubmitted'])->name('post-submitted');
     Route::get('/applicant', [DashboardController::class, 'applicant'])->name('applicant');
-
 });
-
-
-
-
