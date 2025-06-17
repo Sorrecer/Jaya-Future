@@ -38,6 +38,7 @@ class MultiStepForm extends Component
     {
         // lanjut ke halaman berikutnya settelah validasi data
         $this->resetErrorBag(); // Reset error messages
+        $this->register();
         if ($this->currentStep < $this->totalSteps) {
             $this->currentStep++;
         }

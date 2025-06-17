@@ -23,7 +23,7 @@
             <button class="btn btn-outline-secondary rounded-pill px-3">Open And Paused</button>
         </div>
         
-        <a href="#" class="text-dark btn btn-outline-secondary rounded-pill px-3"> + Add Training</a>
+        <a href="{{ route('admin.internship.create') }}" class="text-dark btn btn-outline-secondary rounded-pill px-3"> + Add Internship</a>
 
         <div>
             <select class="form-select rounded-pill">

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProgramTag;
 use Illuminate\Http\Request;
 
-class ProgramTagController extends Controller
+class jobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +12,8 @@ class ProgramTagController extends Controller
     public function index()
     {
         //
+        return view('admin.job.index');
+        
     }
 
     /**
@@ -21,6 +22,7 @@ class ProgramTagController extends Controller
     public function create()
     {
         //
+        return view('admin.job.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class ProgramTagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProgramTag $programTag)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +44,7 @@ class ProgramTagController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProgramTag $programTag)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +52,7 @@ class ProgramTagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProgramTag $programTag)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +60,7 @@ class ProgramTagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProgramTag $programTag)
+    public function destroy(string $id)
     {
         //
     }

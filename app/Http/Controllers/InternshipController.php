@@ -2,30 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Program;
 use Illuminate\Http\Request;
 
-class ProgramController extends Controller
+class internshipController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function internship()
+    public function index()
     {
         //
-        return view('admin.internship');
-    }
-
-    public function job()
-    {
-        //
-        return view('admin.jobs');
-    }
-
-    public function training()
-    {
-        //
-        return view('admin.training');
+        return view('admin.internship.index');
+        
     }
 
     /**
@@ -34,6 +22,7 @@ class ProgramController extends Controller
     public function create()
     {
         //
+        return view('admin.internship.create');
     }
 
     /**
@@ -47,7 +36,7 @@ class ProgramController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Program $program)
+    public function show(string $id)
     {
         //
     }
@@ -55,7 +44,7 @@ class ProgramController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Program $program)
+    public function edit(string $id)
     {
         //
     }
@@ -63,7 +52,7 @@ class ProgramController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Program $program)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -71,7 +60,7 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Program $program)
+    public function destroy(string $id)
     {
         //
     }
