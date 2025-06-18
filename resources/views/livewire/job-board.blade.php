@@ -33,7 +33,13 @@
                                 <small class="text-muted">{{ $selectedJob->location }} • {{ $selectedJob->job_type }}</small>
                             </div>
                         </div>
-                        <a href="{{ route('application.form', ['job' => $job->id]) }}" class="btn btn-outline-dark">Apply Now</a>
+                        <div class="d-flex align-items-center gap-2">
+                            <button wire:click="archiveJob({{ $selectedJob->id }})" class="btn btn-outline-secondary" title="Archive this job">
+                                <i class="bi bi-bookmark"></i> {{-- Bootstrap Icon --}}
+                            </button>
+                            <a href="{{ route('application.form', ['job' => $selectedJob->id]) }}" class="btn btn-outline-dark">Apply Now</a>
+                        </div>
+
                     </div>
 
                     <ul class="nav nav-tabs mt-4">
@@ -64,6 +70,17 @@
             @else
             <div class="alert alert-info">Select a job to view details</div>
             @endif
+
+            @if (session()->has('message'))
+            <div class="alert alert-success mt-3">
+                {{ session('message') }}
+            </div>
+            @elseif (session()->has('error'))
+            <div class="alert alert-danger mt-3">
+                {{ session('error') }}
+            </div>
+            @endif
+
         </div>
     </div>
 </div>

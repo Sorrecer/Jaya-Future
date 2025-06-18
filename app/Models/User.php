@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Job;
+use App\Models\ArchivedJob;
 
 class User extends Authenticatable
 {
@@ -35,6 +37,7 @@ class User extends Authenticatable
 
     public function archivedJobs()
     {
-        return $this->belongsToMany(Job::class, 'archived_jobs');
+        return $this->belongsToMany(Job::class, 'archived_jobs')
+            ->using(ArchivedJob::class);
     }
 }

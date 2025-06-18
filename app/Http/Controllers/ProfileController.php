@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
     public function show()
     {
-        // Ambil user yang sedang login
         $user = Auth::user();
 
-        // Kirim user ke view
+        if ($user instanceof \App\Models\User) {
+            $user->load('archivedJobs');
+        }
+
         return view('profile', compact('user'));
     }
 }
