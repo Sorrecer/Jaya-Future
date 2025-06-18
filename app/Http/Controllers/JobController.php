@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Job;
 
@@ -14,7 +15,12 @@ class jobController extends Controller
 
     public function index()
     {
-        $jobs = Job::latest()->get();  // Atau tambahkan where status = 'Open' jika mau filter
+        $jobs = Job::latest()->get();
+
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return view('admin.job.index', compact('jobs'));
+        }
+
         return view('jobs', compact('jobs'));
     }
 
