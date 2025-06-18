@@ -9,6 +9,16 @@ use App\Models\Job;
 
 class ApplicationController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $applications = Application::with(['user', 'job'])
+            ->orderBy('application_date', 'desc')
+            ->get();
+
+        return view('admin.applicant', compact('applications'));;
+    }
+
     public function showForm($jobId)
     {
         $job = Job::findOrFail($jobId);

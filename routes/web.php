@@ -74,5 +74,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Job Opportunities management
     Route::get('/post-submitted', [DashboardController::class, 'postSubmitted'])->name('post-submitted');
-    Route::get('/applicant', [DashboardController::class, 'applicant'])->name('applicant');
+    Route::get('/applicant', [ApplicationController::class, 'index'])->name('applicant');
 });

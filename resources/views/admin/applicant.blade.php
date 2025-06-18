@@ -28,34 +28,26 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($applications as $app)
             <tr>
-                <td><img src="{{ asset('img/applicants/jane.jpg') }}" alt="Jane" class="rounded-circle me-2" style="width:40px;"> Jane Smith</td>
-                <td>Product Designer</td>
-                <td>06/Dec/2024</td>
                 <td>
-                    <select class="form-select">
-                        <option>In Review</option>
-                        <option>Approved</option>
-                        <option>Rejected</option>
+                    <img src="{{ asset('img/applicants/default.jpg') }}" alt="{{ $app->name }}" class="rounded-circle me-2" style="width:40px;">
+                    {{ $app->name }}
+                </td>
+                <td>{{ $app->job->title ?? '-' }}</td>
+                <td>{{ \Carbon\Carbon::parse($app->application_date)->format('d/M/Y') }}</td>
+                <td>
+                    <select class="form-select" data-id="{{ $app->id }}">
+                        <option {{ $app->status == 'In Review' ? 'selected' : '' }}>In Review</option>
+                        <option {{ $app->status == 'Approved' ? 'selected' : '' }}>Approved</option>
+                        <option {{ $app->status == 'Rejected' ? 'selected' : '' }}>Rejected</option>
                     </select>
                 </td>
-                <td><a href="#" class="text-decoration-underline text-primary">View Details</a></td>
+                <td><a href="{{ route('admin.applicant') }}/{{ $app->id }}" class="text-decoration-underline text-primary">View Details</a></td>
             </tr>
-            <tr>
-                <td><img src="{{ asset('img/applicants/smith.jpg') }}" alt="Smith" class="rounded-circle me-2" style="width:40px;"> Smith Joe</td>
-                <td>UX Researcher</td>
-                <td>07/Jun/2024</td>
-                <td>
-                    <select class="form-select">
-                        <option>In Review</option>
-                        <option>Approved</option>
-                        <option>Rejected</option>
-                    </select>
-                </td>
-                <td><a href="#" class="text-decoration-underline text-primary">View Details</a></td>
-            </tr>
-            <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+            @endforeach
         </tbody>
+
     </table>
 
     <div class="text-center mt-4">
