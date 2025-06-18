@@ -3,7 +3,7 @@
 @section('container')
     <div class="container my-5" style="max-width: 700px;">
         <h2 class="my-5">Add Internship</h2>
-        <form action="" method="POST"  enctype="multipart/form-data">
+        <form action="{{ route('admin.internship.store') }}" method="POST"  enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label for="title" class="form-label">Internship Title</label>
@@ -42,7 +42,7 @@
 
             <div class="mb-4">
                 <label for="category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="category" name="category">
+                <input type="text" class="form-control" id="category" name="category" placeholder="Write Internship category" value="{{ old('category') }}">
                 <span class="text-danger">
                         @error('category')
                             {{ $message }}
@@ -93,7 +93,7 @@
             <div class="mb-4">
                 <label for="benefit" class="form-label">Benefits</label>
                 <textarea class="form-control" id="benefit" name="benefit" rows="10" style="min-height: 200px;"
-                    placeholder="Write Internship Benefits">{{ old('benetif') }}</textarea>
+                    placeholder="Write Internship Benefits">{{ old('benefit') }}</textarea>
                     <span class="text-danger">
                         @error('benefit')
                             {{ $message }}
@@ -113,14 +113,14 @@
 
             <div class="mb-4">
                 <label for="status" class="form-label">Status</label>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" name="status">
                     <option value="Open" selected>Open</option>
                     <option value="Closed">Closed</option>
                     <option value="Paused">Paused</option>
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Continue</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 @endsection

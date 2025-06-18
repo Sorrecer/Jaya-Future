@@ -13,8 +13,8 @@ class internshipController extends Controller
     public function index()
     {
         //
-        return view('admin.internship.index');
-        
+        $internships = Job::where('job_kind', 'Internship')->get();
+        return view('admin.internship.index', compact('internships'));
     }
 
     /**
@@ -32,39 +32,40 @@ class internshipController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'job_kind' => 'required',
             'description' => 'required|string',
             'company_name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'categoty' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
             'job_type' => 'required|in:On Site,Hybrid,Remote',
             'requirement' => 'required|string',
             'benefit' => 'required|string',
             'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required',
+            'date_posted' => 'date',
         ]);
 
         if ($request->hasFile('company_logo')) {
-            $request->validate([
-                'company_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
+            $validated['company_logo'] = $request->file('company_logo')->store('company_logos', 'public');
         }
 
-        Job::Create([
-            'title' => $request->title,
+        Job::create([
+            'title' => 'Test Internship',
             'job_kind' => 'Internship',
-            'company_name' => $request->company_name,
-            'location' => $request->location,
-            'category' => $request->categoty,
-            'job_type' => $request->job_type,
-            'description' => $request->description,
-            'requirement' => $request->requirement,
-            'benefit' => $request->benefit,
-            'company_logo' => $request->file('company_logo')->store('logos', 'public'),
+            'company_name' => 'Test Corp',
+            'location' => 'Jakarta',
+            'category' => 'IT',
+            'job_type' => 'On Site',
+            'description' => 'Test description',
+            'requirement' => 'Test requirement',
+            'benefit' => 'Test benefit',
+            'status' => 'Open',
+            'date_posted' => now(),
         ]);
-        
 
-
+        return redirect()->route('admin.internship.index')->with('success', 'Internship created successfully.');
     }
 
     /**
