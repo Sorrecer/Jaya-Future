@@ -19,27 +19,37 @@
                 Tag</a>
         </div>
 
-        <div class="row">
-            @foreach ($tags as $tag)
-                <div class="col-md-6 mb-3">
-                    <div class="card p-3 d-flex">
-                        <h5>{{ $tag->name }}</h5>
-                        <div class="dropdown"><i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown"></i>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('admin.tag.edit', $tag->id) }}">Edit</a></li>
-                                <li>
-                                    <form action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type='submit' class="dropdown-item"
-                                            onclick="return confirm('Are You Sure?')">Delete</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+        <div class="table-responsive">
+            <table class="table align-middle text-start">
+                <thead class="table-light">
+                    <tr>
+                        <th>Tag Name</i></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($tags as $tag)
+                        <tr>
+                            <td><i class="bi bi-star-fill text-primary me-1"></i> {{ $tag->name }}</td>
+                            <td class="dropdown"><i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('admin.tag.edit', $tag->id) }}">Edit</a></li>
+                                    <li>
+                                        <form action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type='submit' class="dropdown-item" onclick="return confirm('Are You Sure?')">Delete</button>
+                                        </form>  
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    @empty
+                        <p>No Data</p>
+                    @endforelse
+
+                </tbody>
+            </table>
         </div>
     </div>
-    @endsection
+@endsection

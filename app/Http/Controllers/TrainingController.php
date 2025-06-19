@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +15,7 @@ class trainingController extends Controller
     public function index()
     {
         //
-        $trainings = Job::where('job_kind', 'Training')->latest()->paginate(10);
+        $trainings = Job::where('job_kind', 'Training')->latest()->simplePaginate(8);
         if (Auth::user()->role === 'admin') {
             return view('admin.training.index', compact('trainings'));
         }
@@ -27,7 +28,8 @@ class trainingController extends Controller
     public function create()
     {
         //
-        return view('admin.training.create');
+        $categories = Tag::all();
+        return view('admin.training.create',compact( 'categories'));
     }
 
     /**
@@ -84,9 +86,10 @@ class trainingController extends Controller
     public function edit(string $id)
     {
         //
+        $categories = Tag::all();
         $trainings = Job::findOrFail($id);
 
-        return view('admin.training.edit', compact('trainings'));
+        return view('admin.training.edit', compact('trainings', 'categories'));
     }
 
     /**

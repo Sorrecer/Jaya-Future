@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,10 +12,18 @@ class internshipController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $internships = Job::where('job_kind', 'Internship')->latest()->paginate(10);
+        $search = $request->input('search');
+
+        $internships = Job::query()
+            ->when($search, function ($query, $search) {
+                $query->where('job_title', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%');
+            })
+            ->where('job_kind', 'Internship')->latest()->simplePaginate(8);
+        
         if (Auth::user()->role === 'admin') {
             return view('admin.internship.index', compact('internships'));
         }
@@ -26,7 +35,8 @@ class internshipController extends Controller
     public function create()
     {
         //
-        return view('admin.internship.create');
+        $categories = Tag::all();
+        return view('admin.internship.create', compact('categories'));
     }
 
     /**
@@ -84,7 +94,8 @@ class internshipController extends Controller
     {
         //
         $internships = Job::findOrFail($id);
-        return view('admin.internship.edit', compact('internships'));
+        $categories = Tag::all();
+        return view('admin.internship.edit', compact('internships', 'categories'));
     }
 
     /**

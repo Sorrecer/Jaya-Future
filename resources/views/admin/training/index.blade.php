@@ -18,11 +18,6 @@
                 </span>
             </div>
 
-            <div class="d-flex gap-2">
-                <button class="btn btn-outline-secondary rounded-pill px-3">Marked</button>
-                <button class="btn btn-outline-secondary rounded-pill px-3">Open And Paused</button>
-            </div>
-
             <a href="{{ route('admin.training.create') }}" class="text-dark btn btn-outline-secondary rounded-pill px-3"> +
                 Add Training</a>
 
@@ -38,12 +33,12 @@
             <table class="table align-middle text-start">
                 <thead class="table-light">
                     <tr>
-                        <th>Job Title <i class="bi bi-arrow-down-up"></i></th>
+                        <th>Job Title</th>
                         <th>Type</th>
                         <th>Location</th>
                         <th>Applicants</th>
                         <th>Views</th>
-                        <th>Date Posted <i class="bi bi-arrow-down-up"></i></th>
+                        <th>Date Posted</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -65,17 +60,19 @@
                         @endif
 
                         <td class="dropdown"><i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown"></i>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('admin.training.edit', $train->id) }}">Edit</a></li>
-                                    <li>
-                                        <form action="{{ route('admin.training.destroy', $train->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type='submit' class="dropdown-item" onclick="return confirm('Are You Sure?')">Delete</button>
-                                        </form>  
-                                    </li>
-                                </ul>
-                            </td>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('admin.training.edit', $train->id) }}">Edit</a>
+                                </li>
+                                <li>
+                                    <form action="{{ route('admin.training.destroy', $train->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type='submit' class="dropdown-item"
+                                            onclick="return confirm('Are You Sure?')">Delete</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </td>
                         </tr>
                     @empty
                         <p>No data</p>
@@ -83,10 +80,8 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- See Less -->
-        <div class="text-center mt-4">
-            <a href="#" class="text-primary text-decoration-underline">See Less <i class="bi bi-chevron-up"></i></a>
+        <div class="mt-4">
+            {{ $trainings->links() }}
         </div>
     </div>
 @endsection

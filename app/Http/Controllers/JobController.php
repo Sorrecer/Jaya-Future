@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Job;
-
+use App\Models\Tag;
 
 class jobController extends Controller
 {
@@ -15,7 +15,7 @@ class jobController extends Controller
 
     public function index()
     {
-        $jobs = Job::where('job_kind', 'Job')->latest()->paginate(10);
+        $jobs = Job::where('job_kind', 'Job')->latest()->SimplePaginate(8);
 
         if (Auth::check() && Auth::user()->role === 'admin') {
             return view('admin.job.index', compact('jobs'));
@@ -29,8 +29,8 @@ class jobController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.job.create');
+        $categories = Tag::all();
+        return view('admin.job.create', compact('categories'));
     }
 
     /**
@@ -90,8 +90,9 @@ class jobController extends Controller
     public function edit(string $id)
     {
         //
+        $categories = Tag::all();
         $jobs = Job::findOrFail($id);
-        return view('admin.job.edit', compact('jobs'));
+        return view('admin.job.edit', compact('jobs', 'categories'));
     }
 
     /**

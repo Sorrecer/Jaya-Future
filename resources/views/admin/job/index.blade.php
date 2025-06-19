@@ -38,12 +38,12 @@
             <table class="table align-middle text-start">
                 <thead class="table-light">
                     <tr>
-                        <th>Job Title <i class="bi bi-arrow-down-up"></i></th>
+                        <th>Job Title</th>
                         <th>Type</th>
                         <th>Location</th>
                         <th>Applicants</th>
                         <th>Views</th>
-                        <th>Date Posted <i class="bi bi-arrow-down-up"></i></th>
+                        <th>Date Posted</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -85,10 +85,8 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- See Less -->
-        <div class="text-center mt-4">
-            <a href="#" class="text-primary text-decoration-underline">See Less <i class="bi bi-chevron-up"></i></a>
+        <div class="mt-4">
+            {{ $jobs->links() }}
         </div>
     </div>
 @endsection

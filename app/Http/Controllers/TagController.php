@@ -13,7 +13,7 @@ class TagController extends Controller
     public function index()
     {
         //
-        $tags = Tag::latest()->paginate(8);
+        $tags = Tag::latest()->simplePaginate(8);
         return view('admin.tag.index',compact('tags'));
     }
 
@@ -60,7 +60,7 @@ class TagController extends Controller
         //
         $tags = Tag::find($id);
 
-        return view('admin.tag.edit', $tags);
+        return view('admin.tag.edit', compact('tags'));
     }
 
     /**

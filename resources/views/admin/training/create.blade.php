@@ -43,13 +43,13 @@
             </div>
 
             <div class="mb-4">
-                <label for="category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="category" name="category">
-                <span class="text-danger">
-                    @error('category')
-                        {{ $message }}
-                    @enderror
-                </span>
+                <select name="category" id="category" class="py-3 rounded-lg pl-3 w-full border border-slate-300">
+                    <option value="">Choose category</option>
+                    @forelse($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @empty
+                    @endforelse
+                </select>
             </div>
 
             <div class="mb-4">
