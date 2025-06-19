@@ -12,6 +12,7 @@ use App\Http\Controllers\RegisteredController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -67,6 +68,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // dashboard 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/jobs-admin', [DashboardController::class, 'jobsAdmin'])->name('jobs-admin');
+    Route::resource('tag', TagController::class);
     Route::resource('internship', InternshipController::class);
     Route::resource('job', JobController::class);
     Route::resource('training', TrainingController::class);
