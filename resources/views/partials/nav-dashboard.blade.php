@@ -19,8 +19,15 @@
             <div class="dropdown">
                 <div class="rounded-circle overflow-hidden border dropdown" data-bs-toggle="dropdown"
                     aria-expanded="false" style="width: 40px; height: 40px;">
-                    <img src="{{ Auth::user()->profile_picture }}"
+                    @php
+                    $profilePicture = Auth::user()->profile_picture
+                    ? asset('storage/' . Auth::user()->profile_picture)
+                    : asset('img/default.jpg'); // fallback jika belum ada foto
+                    @endphp
+
+                    <img src="{{ $profilePicture }}"
                         style="width: 100%; height: 100%; object-fit: cover;">
+
                 </div>
 
                 <ul class="dropdown-menu">
