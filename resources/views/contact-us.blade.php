@@ -10,7 +10,14 @@
         <h2 class="fw-bold mb-2">Contact Us</h2>
         <p class="text-muted mb-4">Fill in the fields below and we will be able to better respond to your request</p>
 
-        <form action="#" method="POST" enctype="multipart/form-data">
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        <form action="{{ route('contact.submit') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -36,19 +43,20 @@
 
             <div class="mb-3">
                 <label for="file" class="form-label">Upload File</label>
-                <input class="form-control" type="file" id="file" name="file">
+                <input class="form-control" type="file" id="file" name="upload_file">
             </div>
 
             <div class="mb-3">
                 <label for="category" class="form-label">What Is The Topic Of Your Question? *</label>
-                <select class="form-select" id="category" name="category">
+                <select class="form-select" id="category" name="topic">
                     <option selected disabled>Select Category</option>
-                    <option>General Inquiry</option>
-                    <option>Technical Support</option>
-                    <option>Billing</option>
-                    <option>Other</option>
+                    <option value="General">General Inquiry</option>
+                    <option value="Technical Support">Technical Support</option>
+                    <option value="Billing">Billing</option>
+                    <option value="Others">Other</option>
                 </select>
             </div>
+
 
             <div class="mb-3">
                 <label for="subject" class="form-label">Subject *</label>

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\JobController;
@@ -9,12 +11,12 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RegisteredController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactMessageController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/about-us', function () {
     return view('about-us');
@@ -22,11 +24,9 @@ Route::get('/about-us', function () {
 
 Route::get('/contact-us', function () {
     return view('contact-us');
-});
+})->name('contact-us');
 
-Route::get('/companies', function () {
-    return view('companies');
-})->name('companies');
+Route::post('/contact-submit', [ContactMessageController::class, 'submit'])->name('contact.submit');
 
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
@@ -70,6 +70,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('internship', InternshipController::class);
     Route::resource('job', JobController::class);
     Route::resource('training', TrainingController::class);
+    Route::get('/messages', [ContactMessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{id}', [ContactMessageController::class, 'show'])->name('messages.show');
 
 
     // Job Opportunities management
