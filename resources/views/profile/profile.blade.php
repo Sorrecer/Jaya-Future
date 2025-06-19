@@ -6,9 +6,13 @@
         <div class="d-flex align-items-center mb-5">
             <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('img/logo.jpg') }}" class="rounded-circle me-3" width="70" height="70" alt="Profile Photo">
             <div class="flex-grow-1">
+
                 <h4 class="fw-bold mb-0">{{ $user->name }}</h4>
                 <p class="text-muted mb-0">{{ $user->job_title ?? 'Job title not set' }}</p>
                 <p class="text-muted">{{ $user->location ?? 'Location not set' }}</p>
+            </div>
+            <div class="text-end">
+                <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-outline-primary">Edit Profile</a>
             </div>
         </div>
 
@@ -54,11 +58,16 @@
                 <div class="border rounded py-4 px-3 mb-2 d-flex justify-content-between align-items-center">
                     <div>
                         <i class="bi bi-file-earmark-text-fill me-2"></i>
-                        <span>{{ $user->resume }}</span>
-                        <small class="text-muted d-block">Uploaded Resume</small>
+                        <a href="{{ asset('storage/' . $user->resume) }}" download class="text-decoration-none fw-semibold">
+                            {{ basename($user->resume) }}
+                        </a>
+                        <small class="text-muted d-block">Click to download resume</small>
                     </div>
-                    <i class="bi bi-three-dots-vertical"></i>
+                    <a href="{{ asset('storage/' . $user->resume) }}" download class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-download"></i> Download
+                    </a>
                 </div>
+
                 @else
                 <p class="text-muted">No resume uploaded</p>
                 @endif
