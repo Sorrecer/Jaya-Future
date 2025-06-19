@@ -21,6 +21,12 @@ class ApplicationController extends Controller
         return view('admin.applicant', compact('applications'));
     }
 
+    public function show($id)
+    {
+        $application = \App\Models\Application::with('job', 'user')->findOrFail($id);
+        return view('admin.applicant-show', compact('application'));
+    }
+
 
     public function showForm($jobId)
     {

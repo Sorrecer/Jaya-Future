@@ -59,7 +59,11 @@
 
 
                 </td>
-                <td><a href="{{ route('admin.applicant') }}/{{ $app->id }}" class="text-decoration-underline text-primary">View Details</a></td>
+                <td>
+                    <a href="{{ route('admin.applicant.show', $app->id) }}" class="text-decoration-underline text-primary">View Details</a>
+                </td>
+
+
             </tr>
             @endforeach
         </tbody>

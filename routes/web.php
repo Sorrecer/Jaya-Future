@@ -77,6 +77,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // routes/web.php
     Route::get('/applicants/{status?}', [ApplicationController::class, 'index'])->name('applicant');
     Route::patch('/applicant/{id}/update-status', [ApplicationController::class, 'updateStatus'])->name('applicant.updateStatus');
+    Route::get('/applicant/{id}', [ApplicationController::class, 'show'])->name('applicant.show');
 
 
 
