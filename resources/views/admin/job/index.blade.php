@@ -1,90 +1,94 @@
 @extends('layout.dashboard')
 
 @section('container')
-<div class="container py-5">
+    <div class="container py-5">
 
-    <!-- Title -->
-    <h2 class="fw-bold mb-4 text-start">Posts</h2>
+        <!-- Title -->
+        <h2 class="fw-bold mb-4 text-start">Jobs</h2>
 
-    <!-- Search and Filter -->
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-        <div class="input-group" style="max-width: 400px;">
-            <span class="input-group-text bg-white border-end-0">
-                <i class="bi bi-search"></i>
-            </span>
-            <input type="text" class="form-control border-start-0" placeholder="Search and Filter">
-            <span class="input-group-text bg-white">
-                <i class="bi bi-sliders2"></i>
-            </span>
+        <!-- Search and Filter -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div class="input-group" style="max-width: 400px;">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control border-start-0" placeholder="Search and Filter">
+                <span class="input-group-text bg-white">
+                    <i class="bi bi-sliders2"></i>
+                </span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-secondary rounded-pill px-3">Marked</button>
+                <button class="btn btn-outline-secondary rounded-pill px-3">Open And Paused</button>
+            </div>
+
+            <a href="{{ route('admin.job.create') }}" class="text-dark btn btn-outline-secondary rounded-pill px-3"> + Add
+                Job</a>
+
+            <div>
+                <select class="form-select rounded-pill">
+                    <option>Applicants</option>
+                </select>
+            </div>
         </div>
 
-        <div class="d-flex gap-2">
-            <button class="btn btn-outline-secondary rounded-pill px-3">Marked</button>
-            <button class="btn btn-outline-secondary rounded-pill px-3">Open And Paused</button>
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table align-middle text-start">
+                <thead class="table-light">
+                    <tr>
+                        <th>Job Title <i class="bi bi-arrow-down-up"></i></th>
+                        <th>Type</th>
+                        <th>Location</th>
+                        <th>Applicants</th>
+                        <th>Views</th>
+                        <th>Date Posted <i class="bi bi-arrow-down-up"></i></th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($jobs as $job)
+                        <tr>
+                            <td><i class="bi bi-star-fill text-primary me-1"></i> {{ $job->title }}</td>
+                            <td>{{ $job->job_type }}</td>
+                            <td>{{ $job->location }}</td>
+                            <td>17 <button class="btn btn-outline-dark btn-sm rounded-pill ms-2">View</button></td>
+                            <td>901</td>
+                            <td>{{ \Carbon\Carbon::parse($job->date_posted)->translatedFormat('d F Y') }}</td>
+                            @if ($job->status == 'Open')
+                                <td><span class="badge bg-success">{{ $job->status }}</span></td>
+                            @elseif($job->status == 'Paused')
+                                <td><span class="badge bg-warning">{{ $job->status }}</span></td>
+                            @else
+                                <td><span class="badge bg-secondary">{{ $job->status }}</span></td>
+                            @endif
+
+                            <td class="dropdown"><i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('admin.job.edit', $job->id) }}">Edit</a></li>
+                                    <li>
+                                        <form action="{{ route('admin.job.destroy', $job->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type='submit' class="dropdown-item" onclick="return confirm('Are You Sure?')">Delete</button>
+                                        </form>  
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    @empty
+                        <p>No Data</p>
+                    @endforelse
+
+                </tbody>
+            </table>
         </div>
 
-        <a href="{{ route('admin.job.create') }}" class="text-dark btn btn-outline-secondary rounded-pill px-3"> + Add Job</a>
-
-        <div>
-            <select class="form-select rounded-pill">
-                <option>Applicants</option>
-            </select>
+        <!-- See Less -->
+        <div class="text-center mt-4">
+            <a href="#" class="text-primary text-decoration-underline">See Less <i class="bi bi-chevron-up"></i></a>
         </div>
     </div>
-
-    <!-- Table -->
-    <div class="table-responsive">
-        <table class="table align-middle text-start">
-            <thead class="table-light">
-                <tr>
-                    <th>Job Title <i class="bi bi-arrow-down-up"></i></th>
-                    <th>Type</th>
-                    <th>Location</th>
-                    <th>Applicants</th>
-                    <th>Views</th>
-                    <th>Date Posted <i class="bi bi-arrow-down-up"></i></th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><i class="bi bi-star-fill text-primary me-1"></i> UX/UI Designer</td>
-                    <td>Remote</td>
-                    <td>Karlsruhe, Germany</td>
-                    <td>17 <button class="btn btn-outline-dark btn-sm rounded-pill ms-2">View</button></td>
-                    <td>901</td>
-                    <td>06/Jul/2024</td>
-                    <td><span class="badge bg-secondary">Closed</span></td>
-                    <td><i class="bi bi-three-dots-vertical"></i></td>
-                </tr>
-                <tr>
-                    <td><i class="bi bi-star-fill text-primary me-1"></i> Product Designer</td>
-                    <td>On Site</td>
-                    <td>Delft, Netherlands</td>
-                    <td>10 <button class="btn btn-outline-dark btn-sm rounded-pill ms-2">View</button></td>
-                    <td>203</td>
-                    <td>09/Jul/2024</td>
-                    <td><span class="badge bg-success">Open</span></td>
-                    <td><i class="bi bi-three-dots-vertical"></i></td>
-                </tr>
-                <tr>
-                    <td><i class="bi bi-star-fill text-primary me-1"></i> UX/UI Designer</td>
-                    <td>Hybrid</td>
-                    <td>Berlin, Germany</td>
-                    <td>15 <button class="btn btn-outline-dark btn-sm rounded-pill ms-2">View</button></td>
-                    <td>901</td>
-                    <td>06/Jul/2024</td>
-                    <td><span class="badge bg-warning text-dark">Paused</span></td>
-                    <td><i class="bi bi-three-dots-vertical"></i></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- See Less -->
-    <div class="text-center mt-4">
-        <a href="#" class="text-primary text-decoration-underline">See Less <i class="bi bi-chevron-up"></i></a>
-    </div>
-</div>
 @endsection

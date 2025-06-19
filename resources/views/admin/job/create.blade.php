@@ -116,14 +116,14 @@
 
         <div class="mb-4">
             <label for="status" class="form-label">Status</label>
-            <select class="form-select" name="status" aria-label="Default select example">
+            <select class="form-select" name="status" aria-label="Default select example" name="status">
                 <option value="Open" selected>Open</option>
                 <option value="Closed">Closed</option>
                 <option value="Paused">Paused</option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Continue</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 @if(session('success'))

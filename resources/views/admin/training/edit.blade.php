@@ -2,13 +2,14 @@
 
 @section('container')
     <div class="container my-5" style="max-width: 700px;">
-        <h2 class="my-5">Add Training Information</h2>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <h2 class="my-5">Update Training Information</h2>
+        <form action="{{ route('admin.training.update', $trainings->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="mb-4">
                 <label for="title" class="form-label">Training Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Write Training Title"
-                    value="{{ old('title') }}">
+                    value="{{ $trainings->title }}">
                 <span class="text-danger">
                     @error('title')
                         {{ $message }}
@@ -23,7 +24,7 @@
             <div class="mb-4">
                 <label for="company_name" class="form-label">Company Name</label>
                 <input type="text" class="form-control" id="company_name" name="company_name"
-                    placeholder="Write Company Name" value="{{ old('company_name') }}">
+                    placeholder="Write Company Name" value="{{ $trainings->company_name }}">
                 <span class="text-danger">
                     @error('company_name')
                         {{ $message }}
@@ -34,7 +35,7 @@
             <div class="mb-4">
                 <label for="location" class="form-label">Location</label>
                 <input type="text" class="form-control" id="location" name="location"
-                    placeholder="Write Training Location" value="{{ old('location') }}">
+                    placeholder="Write Training Location" value="{{ $trainings->location }}">
                 <span class="text-danger">
                     @error('location')
                         {{ $message }}
@@ -73,7 +74,7 @@
             <div class="mb-4">
                 <label for="description" class="form-label">Training Description</label>
                 <textarea class="form-control" id="description" name="description" rows="10" style="min-height: 200px;"
-                    placeholder="Training Description">{{ old('description') }}</textarea>
+                    placeholder="Training Description">{{ $trainings->description }}</textarea>
                 <span class="text-danger">
                     @error('description')
                         {{ $message }}
@@ -84,7 +85,7 @@
             <div class="mb-4">
                 <label for="requirement" class="form-label">Requirement</label>
                 <textarea class="form-control" id="requirement" name="requirement" rows="10" style="min-height: 200px;"
-                    placeholder="Write Training Requirement">{{ old('requirement') }}</textarea>
+                    placeholder="Write Training Requirement">{{ $trainings->requirement }}</textarea>
                 <span class="text-danger">
                     @error('requirement')
                         {{ $message }}
@@ -95,7 +96,7 @@
             <div class="mb-4">
                 <label for="benefit" class="form-label">Benefits</label>
                 <textarea class="form-control" id="benefit" name="benefit" rows="10" style="min-height: 200px;"
-                    placeholder="Write Training Benefits">{{ old('benetif') }}</textarea>
+                    placeholder="Write Training Benefits">{{ $trainings->benefit }}</textarea>
                 <span class="text-danger">
                     @error('benefit')
                         {{ $message }}
@@ -106,6 +107,7 @@
             <div class="mb-4">
                 <label for="company_logo" class="form-label">Company Logo</label>
                 <input type="file" class="form-control" id="company_logo" name="company_logo">
+                <img src="{{ Storage::url($trainings->company_logo) }}" alt="" style="width: 100px;">
                 <span class="text-danger">
                     @error('company_logo')
                         {{ $message }}
@@ -115,14 +117,14 @@
 
             <div class="mb-4">
                 <label for="status" class="form-label">Status</label>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" name="status">
                     <option value="Open" selected>Open</option>
                     <option value="Closed">Closed</option>
                     <option value="Paused">Paused</option>
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Continue</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 @endsection

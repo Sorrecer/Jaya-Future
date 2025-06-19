@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class internshipController extends Controller
 {
@@ -13,8 +14,10 @@ class internshipController extends Controller
     public function index()
     {
         //
-        $internships = Job::where('job_kind', 'Internship')->get();
-        return view('admin.internship.index', compact('internships'));
+        $internships = Job::where('job_kind', 'Internship')->latest()->paginate(10);
+        if (Auth::user()->role === 'admin') {
+            return view('admin.internship.index', compact('internships'));
+        }
     }
 
     /**
@@ -31,41 +34,39 @@ class internshipController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'job_kind' => 'required',
+        $request->validate([
+            'title' => 'required|string',
+            'company_name' => 'required|string',
+            'location' => 'required|string',
+            'category' => 'required|string',
+            'job_type' => 'required|string',
             'description' => 'required|string',
-            'company_name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'job_type' => 'required|in:On Site,Hybrid,Remote',
             'requirement' => 'required|string',
             'benefit' => 'required|string',
-            'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'status' => 'required',
-            'date_posted' => 'date',
+            'company_logo' => 'nullable|image|max:2048',
+            'status' => 'required|in:Open,Closed,Paused',
         ]);
 
+        $logoPath = null;
         if ($request->hasFile('company_logo')) {
-            $validated['company_logo'] = $request->file('company_logo')->store('company_logos', 'public');
+            $logoPath = $request->file('company_logo')->store('logos', 'public');
         }
 
         Job::create([
-            'title' => 'Test Internship',
-            'job_kind' => 'Internship',
-            'company_name' => 'Test Corp',
-            'location' => 'Jakarta',
-            'category' => 'IT',
-            'job_type' => 'On Site',
-            'description' => 'Test description',
-            'requirement' => 'Test requirement',
-            'benefit' => 'Test benefit',
-            'status' => 'Open',
-            'date_posted' => now(),
+            'title' => $request->title,
+            'job_kind' => $request->job_kind,
+            'company_name' => $request->company_name,
+            'location' => $request->location,
+            'category' => $request->category,
+            'job_type' => $request->job_type,
+            'description' => $request->description,
+            'requirement' => $request->requirement,
+            'benefit' => $request->benefit,
+            'company_logo' => $logoPath,
+            'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.internship.index')->with('success', 'Internship created successfully.');
+        return redirect()->route('admin.internship.index')->with('success', 'Job successfully added!');
     }
 
     /**
@@ -82,6 +83,8 @@ class internshipController extends Controller
     public function edit(string $id)
     {
         //
+        $internships = Job::findOrFail($id);
+        return view('admin.internship.edit', compact('internships'));
     }
 
     /**
@@ -90,6 +93,41 @@ class internshipController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $internships = Job::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string',
+            'company_name' => 'required|string',
+            'location' => 'required|string',
+            'category' => 'required|string',
+            'job_type' => 'required|string',
+            'description' => 'required|string',
+            'requirement' => 'required|string',
+            'benefit' => 'required|string',
+            'company_logo' => 'nullable|image|max:2048',
+            'status' => 'required|in:Open,Closed,Paused',
+        ]);
+
+        $logoPath = null;
+        if ($request->hasFile('company_logo')) {
+            $logoPath = $request->file('company_logo')->store('logos', 'public');
+        }
+
+        $internships->update([
+            'title' => $request->title,
+            'job_kind' => $request->job_kind,
+            'company_name' => $request->company_name,
+            'location' => $request->location,
+            'category' => $request->category,
+            'job_type' => $request->job_type,
+            'description' => $request->description,
+            'requirement' => $request->requirement,
+            'benefit' => $request->benefit,
+            'company_logo' => $logoPath ?? $internships->company_logo,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('admin.internship.index')->with('success','Internship Succesfully Update');
     }
 
     /**
@@ -98,5 +136,8 @@ class internshipController extends Controller
     public function destroy(string $id)
     {
         //
+        $internship = Job::findOrFail($id);
+        $internship->delete();
+        return redirect()->route('admin.internship.index')->with('success', 'Internship successfully deleted!');
     }
 }
