@@ -3,7 +3,7 @@
 @section('container')
     <div class="container my-5" style="max-width: 700px;">
         <h2 class="my-5">Add Training Information</h2>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.training.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label for="title" class="form-label">Training Title</label>
@@ -115,14 +115,14 @@
 
             <div class="mb-4">
                 <label for="status" class="form-label">Status</label>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" name="status">
                     <option value="Open" selected>Open</option>
                     <option value="Closed">Closed</option>
                     <option value="Paused">Paused</option>
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Continue</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 @endsection

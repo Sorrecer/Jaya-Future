@@ -4,7 +4,7 @@
     <div class="container py-5">
 
         <!-- Title -->
-        <h2 class="fw-bold mb-4 text-start">Posts</h2>
+        <h2 class="fw-bold mb-4 text-start">Internships</h2>
 
         <!-- Search and Filter -->
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
@@ -56,7 +56,7 @@
                             <td>{{ $intern->location }}</td>
                             <td>17 <button class="btn btn-outline-dark btn-sm rounded-pill ms-2">View</button></td>
                             <td>901</td>
-                            <td>{{ $intern->date_posted }}</td>
+                            <td>{{ \Carbon\Carbon::parse($intern->date_posted)->translatedFormat('d F Y') }}</td>
                             @if ($intern->status == 'Open')
                                 <td><span class="badge bg-success">{{ $intern->status }}</span></td>
                             @elseif($intern->status == 'Paused')
@@ -65,7 +65,18 @@
                                 <td><span class="badge bg-secondary">{{ $intern->status }}</span></td>
                             @endif
 
-                            <td><i class="bi bi-three-dots-vertical"></i></td>
+                            <td class="dropdown"><i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('admin.internship.edit', $intern->id) }}">Edit</a></li>
+                                    <li>
+                                        <form action="{{ route('admin.internship.destroy', $intern->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type='submit' class="dropdown-item" onclick="return confirm('Are You Sure?')">Delete</button>
+                                        </form>  
+                                    </li>
+                                </ul>
+                            </td>
                         </tr>
                     @empty
                         <p>No Data </p>

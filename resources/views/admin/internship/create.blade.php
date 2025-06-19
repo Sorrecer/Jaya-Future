@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container my-5" style="max-width: 700px;">
-        <h2 class="my-5">Add Internship</h2>
+        <h2 class="my-5">Add Internship Information</h2>
         <form action="{{ route('admin.internship.store') }}" method="POST"  enctype="multipart/form-data">
             @csrf
             <div class="mb-4">

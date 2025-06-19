@@ -15,7 +15,7 @@ class jobController extends Controller
 
     public function index()
     {
-        $jobs = Job::latest()->get();
+        $jobs = Job::where('job_kind', 'Job')->latest()->paginate(10);
 
         if (Auth::check() && Auth::user()->role === 'admin') {
             return view('admin.job.index', compact('jobs'));
@@ -58,6 +58,7 @@ class jobController extends Controller
 
         Job::create([
             'title' => $request->title,
+            'job_kind' => $request->job_kind,
             'company_name' => $request->company_name,
             'location' => $request->location,
             'category' => $request->category,
@@ -69,7 +70,7 @@ class jobController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.job.create')->with('success', 'Job successfully added!');
+        return redirect()->route('admin.job.index')->with('success', 'Job successfully added!');
     }
 
 
@@ -78,8 +79,8 @@ class jobController extends Controller
      */
     public function show(string $id)
     {
-        $job = Job::findOrFail($id);
-        return view('job-detail', compact('job'));
+        $jobs = Job::findOrFail($id);
+        // return view('job-detail', compact('jobs'));
     }
 
 
@@ -89,6 +90,8 @@ class jobController extends Controller
     public function edit(string $id)
     {
         //
+        $jobs = Job::findOrFail($id);
+        return view('admin.job.edit', compact('jobs'));
     }
 
     /**
@@ -97,6 +100,41 @@ class jobController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $jobs = Job::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string',
+            'company_name' => 'required|string',
+            'location' => 'required|string',
+            'category' => 'required|string',
+            'job_type' => 'required|string',
+            'description' => 'required|string',
+            'requirement' => 'required|string',
+            'benefit' => 'required|string',
+            'company_logo' => 'nullable|image|max:2048',
+            'status' => 'required|in:Open,Closed,Paused',
+        ]);
+
+        $logoPath = null;
+        if ($request->hasFile('company_logo')) {
+            $logoPath = $request->file('company_logo')->store('logos', 'public');
+        }
+
+        $jobs->update([
+            'title' => $request->title,
+            'job_kind' => $request->job_kind,
+            'company_name' => $request->company_name,
+            'location' => $request->location,
+            'category' => $request->category,
+            'job_type' => $request->job_type,
+            'description' => $request->description,
+            'requirement' => $request->requirement,
+            'benefit' => $request->benefit,
+            'company_logo' => $logoPath ?? $jobs->company_logo,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('admin.job.index')->with('success', 'Job successfully Update!');
     }
 
     /**
@@ -105,5 +143,9 @@ class jobController extends Controller
     public function destroy(string $id)
     {
         //
+        $job = Job::findOrFail($id);
+        $job->delete();
+
+        return redirect()->route('admin.job.index')->with('success', 'Successfully Delete');
     }
 }
