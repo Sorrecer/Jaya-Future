@@ -58,19 +58,20 @@
 
     <script src="https://cdn.ckeditor.com/ckeditor5/45.2.0/ckeditor5.umd.js"></script>
     <script>
-        const ClassicEditor = 
-        .create( document.querySelector( '#editor' ), {
-            licenseKey: '<YOUR_LICENSE_KEY>',
-            plugins: [ Essentials, Bold, Italic, Font, Paragraph, FormatPainter ],
-            toolbar: [
-                'undo', 'redo', '|', 'bold', 'italic', '|',
-                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
-                'formatPainter'
-            ]
-        } )
-        .then( /* ... */ )
-        .catch( /* ... */ );
+        const ClassicEditor =
+            .create(document.querySelector('#editor'), {
+                licenseKey: '<YOUR_LICENSE_KEY>',
+                plugins: [Essentials, Bold, Italic, Font, Paragraph, FormatPainter],
+                toolbar: [
+                    'undo', 'redo', '|', 'bold', 'italic', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
+                    'formatPainter'
+                ]
+            })
+            .then( /* ... */ )
+            .catch( /* ... */ );
     </script>
+    @stack('scripts')
 </body>
 
 </html>

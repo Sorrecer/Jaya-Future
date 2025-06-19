@@ -51,11 +51,12 @@
                 <td>{{ $app->job->title ?? '-' }}</td>
                 <td>{{ \Carbon\Carbon::parse($app->application_date)->format('d/M/Y') }}</td>
                 <td>
-                    <select class="form-select" data-id="{{ $app->id }}">
+                    <select class="form-select status-dropdown" data-id="{{ $app->id }}">
                         <option value="In Review" {{ $app->status === 'In Review' ? 'selected' : '' }}>In Review</option>
                         <option value="Approved" {{ $app->status === 'Approved' ? 'selected' : '' }}>Approved</option>
                         <option value="Rejected" {{ $app->status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
                     </select>
+
 
                 </td>
                 <td><a href="{{ route('admin.applicant') }}/{{ $app->id }}" class="text-decoration-underline text-primary">View Details</a></td>
@@ -69,4 +70,43 @@
         <a href="#" class="text-decoration-none text-primary">See More</a>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.querySelectorAll('.status-dropdown').forEach(select => {
+        select.addEventListener('change', function() {
+            const applicantId = this.getAttribute('data-id');
+            const newStatus = this.value;
+            const previousStatus = this.querySelector('option[selected]')?.value || '';
+
+            if (confirm(`Are you sure you want to change the status to "${newStatus}"?`)) {
+                fetch(`/admin/applicant/${applicantId}/update-status`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            status: newStatus
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to update status.');
+                    });
+            } else {
+                // Revert selection if cancelled
+                this.value = previousStatus;
+            }
+        });
+    });
+</script>
+@endpush
+
 @endsection

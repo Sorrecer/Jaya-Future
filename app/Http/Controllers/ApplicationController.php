@@ -61,4 +61,17 @@ class ApplicationController extends Controller
 
         return redirect()->back()->with('success', 'Application submitted successfully!');
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:Approved,In Review,Rejected',
+        ]);
+
+        $app = \App\Models\Application::findOrFail($id);
+        $app->status = $request->status;
+        $app->save();
+
+        return response()->json(['message' => 'Status updated successfully.']);
+    }
 }

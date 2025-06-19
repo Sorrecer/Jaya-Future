@@ -76,6 +76,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/messages/{id}', [ContactMessageController::class, 'show'])->name('messages.show');
     // routes/web.php
     Route::get('/applicants/{status?}', [ApplicationController::class, 'index'])->name('applicant');
+    Route::patch('/applicant/{id}/update-status', [ApplicationController::class, 'updateStatus'])->name('applicant.updateStatus');
+
+
 
     // Route::get('/applicant', [ApplicationController::class, 'index'])->name('applicant');
 
