@@ -72,9 +72,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('training', TrainingController::class);
     Route::get('/messages', [ContactMessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{id}', [ContactMessageController::class, 'show'])->name('messages.show');
+    // routes/web.php
+    Route::get('/applicants/{status?}', [ApplicationController::class, 'index'])->name('applicant');
 
+    // Route::get('/applicant', [ApplicationController::class, 'index'])->name('applicant');
 
     // Job Opportunities management
     Route::get('/post-submitted', [DashboardController::class, 'postSubmitted'])->name('post-submitted');
-    Route::get('/applicant', [ApplicationController::class, 'index'])->name('applicant');
 });

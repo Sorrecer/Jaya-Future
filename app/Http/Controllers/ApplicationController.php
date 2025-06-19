@@ -10,14 +10,17 @@ use App\Models\Job;
 class ApplicationController extends Controller
 {
 
-    public function index(Request $request)
+    public function index($status = null)
     {
-        $applications = Application::with(['user', 'job'])
-            ->orderBy('application_date', 'desc')
-            ->get();
+        if ($status && in_array($status, ['Approved', 'In Review', 'Rejected'])) {
+            $applications = Application::with('job')->where('status', $status)->latest()->get();
+        } else {
+            $applications = Application::with('job')->latest()->get();
+        }
 
-        return view('admin.applicant', compact('applications'));;
+        return view('admin.applicant', compact('applications'));
     }
+
 
     public function showForm($jobId)
     {

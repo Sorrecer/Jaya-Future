@@ -11,11 +11,25 @@
         </button>
     </div>
 
-    <div class="mb-3">
-        <button class="btn btn-outline-secondary">Approved</button>
-        <button class="btn btn-primary mx-2">Waiting</button>
-        <button class="btn btn-outline-secondary">Rejected</button>
-    </div>
+    @php
+    $currentStatus = request()->route('status'); // safer
+    @endphp
+
+    <a href="{{ route('admin.applicant', 'Approved') }}"
+        class="btn {{ $currentStatus == 'Approved' ? 'btn-primary' : 'btn-outline-secondary' }}">
+        Approved
+    </a>
+    <a href="{{ route('admin.applicant', 'In Review') }}"
+        class="btn {{ $currentStatus == 'In Review' ? 'btn-primary' : 'btn-outline-secondary' }} mx-2">
+        Waiting
+    </a>
+    <a href="{{ route('admin.applicant', 'Rejected') }}"
+        class="btn {{ $currentStatus == 'Rejected' ? 'btn-primary' : 'btn-outline-secondary' }}">
+        Rejected
+    </a>
+
+
+
 
     <table class="table align-middle">
         <thead>
@@ -38,10 +52,11 @@
                 <td>{{ \Carbon\Carbon::parse($app->application_date)->format('d/M/Y') }}</td>
                 <td>
                     <select class="form-select" data-id="{{ $app->id }}">
-                        <option {{ $app->status == 'In Review' ? 'selected' : '' }}>In Review</option>
-                        <option {{ $app->status == 'Approved' ? 'selected' : '' }}>Approved</option>
-                        <option {{ $app->status == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                        <option value="In Review" {{ $app->status === 'In Review' ? 'selected' : '' }}>In Review</option>
+                        <option value="Approved" {{ $app->status === 'Approved' ? 'selected' : '' }}>Approved</option>
+                        <option value="Rejected" {{ $app->status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
                     </select>
+
                 </td>
                 <td><a href="{{ route('admin.applicant') }}/{{ $app->id }}" class="text-decoration-underline text-primary">View Details</a></td>
             </tr>
