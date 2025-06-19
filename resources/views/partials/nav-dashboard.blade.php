@@ -46,6 +46,7 @@
     </section>
     <section class="nav d-flex justify-content-center py-3 border">
         <a href="{{ route('admin.dashboard') }}" class="text-dark px-4">Dashboard</a>
+        <a href="{{ route('admin.tag.index') }}" class="text-dark px-4">Tag</a>
         <a href="{{ route('admin.internship.index') }}" class="text-dark px-4">Intership</a>
         <a href="{{ route('admin.job.index') }}" class="text-dark px-4">Job</a>
         <a href="{{ route('admin.training.index') }}" class="text-dark px-4">Training</a>
