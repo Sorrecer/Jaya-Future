@@ -37,8 +37,10 @@ class JobBoard extends Component
 
     public function mount()
     {
-        $this->jobs = Job::latest()->get();
+        $jobKind = ucfirst(strtolower(request()->query('job_kind', 'Job'))); // default ke 'Job'
+        $this->jobs = Job::where('job_kind', $jobKind)->latest()->get();
     }
+
 
     public function selectJob($jobId)
     {

@@ -95,19 +95,9 @@
                     <input type="file" wire:model="profile_picture" class="form-control" />
                 </div>
                 @endif
-
-                <!-- debugging
-                @if ($profile_picture)
-                <div class="mt-2">
-                    <p><strong>Preview:</strong> {{ $profile_picture->getClientOriginalName() }}</p>
-                    <img src="{{ $profile_picture->temporaryUrl() }}" width="150">
-                </div>
-                @endif -->
-
-                @error('profile_picture') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
-            
+
             <div class="col-md-6">
                 <label class="phone_number">Phone Number</label>
                 <input type="text" class="form-control" placeholder="Your Number" wire:model="phone_number">

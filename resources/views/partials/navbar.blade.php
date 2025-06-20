@@ -43,8 +43,9 @@
         </div>
     </section>
     <section class="nav d-flex justify-content-center py-3 border">
-        <a href="{{ route('jobs') }}" class="px-4" style="color:black">Jobs</a>
-        <div class="px-4">Scholarship</div>
-        <div class="px-4">Create CV</div>
+        <a href="{{ route('jobs') }}?job_kind=Job" class="px-4" style="color:black">Jobs</a>
+        <a href="{{ route('jobs') }}?job_kind=Internship" class="px-4" style="color:black">Internship</a>
+        <a href="{{ route('jobs') }}?job_kind=Training" class="px-4" style="color:black">Training</a>
+
     </section>
 </nav>
