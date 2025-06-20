@@ -40,7 +40,10 @@ class JobBoard extends Component
     {
         $query = Job::query();
 
-        // Jika ada pencarian keyword dari URL
+        if ($request->has('job_kind')) {
+            $query->where('job_kind', $request->job_kind);
+        }
+
         if ($request->has('keyword')) {
             $keyword = $request->keyword;
             $query->where(function ($q) use ($keyword) {
@@ -52,7 +55,14 @@ class JobBoard extends Component
         }
 
         $this->jobs = $query->latest()->get();
+
+        // Pilih job pertama secara otomatis jika tersedia
+        if ($this->jobs->isNotEmpty()) {
+            $this->selectedJob = $this->jobs->first();
+        }
     }
+
+
 
     public function selectJob($jobId)
     {
