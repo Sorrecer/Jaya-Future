@@ -71,67 +71,53 @@
             </div>
         </div>
     </section>
+
     <section>
-        <h3 class="text-center font-righteous">Top Companies</h3>
+        <h3 class="text-center font-righteous">Top Internship Opportunities</h3>
         <div class="container d-flex flex-wrap justify-content-center gap-3 my-5">
+            @foreach ($topInternships as $intern)
             <div class="card p-4" style="width: 18rem;">
-                <img src="{{ asset('img/halal.jpg') }}" class="mx-auto border rounded-circle" alt="company"
-                    style="width: 5rem; height: 5rem" ;>
+                <img src="{{ $intern->company_logo ? asset('storage/' . $intern->company_logo) : asset('img/logo-default.png') }}"
+                    class="mx-auto border rounded-circle" alt="company" style="width: 5rem; height: 5rem">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold mb-4">Halal Brother</h5>
-                    <p class="card-text">10.000 to 100,000 employs</p>
-                    <p class="card-text mb-3">6.988.877 Followers</p>
-                    <p class="card-text" style="color: #797878">74% Recommendation rate in last 2 years </p>
+                    <h5 class="card-title fw-bold mb-4">{{ $intern->company_name }}</h5>
+                    <p class="card-text">{{ $intern->title }}</p>
+                    <p class="card-text">{{ $intern->location }} - {{ $intern->job_type }}</p>
+                    <p class="card-text text-muted">{{ \Carbon\Carbon::parse($intern->date_posted)->diffForHumans() }}</p>
                 </div>
                 <div class="mt-2">
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">Hiring</a>
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">High Benefits</a>
+                    <a href="{{ route('jobs.show', $intern->id) }}" class="card-link border rounded-pill py-2 px-3">View</a>
                 </div>
             </div>
-            <div class="card p-4" style="width: 18rem;">
-                <img src="{{ asset('img/halal.jpg') }}" class="mx-auto border rounded-circle" alt="company"
-                    style="width: 5rem; height: 5rem" ;>
-                <div class="card-body">
-                    <h5 class="card-title fw-bold mb-4">Halal Brother</h5>
-                    <p class="card-text">10.000 to 100,000 employs</p>
-                    <p class="card-text mb-3">6.988.877 Followers</p>
-                    <p class="card-text" style="color: #797878">74% Recommendation rate in last 2 years </p>
-                </div>
-                <div class="mt-2">
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">Hiring</a>
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">High Benefits</a>
-                </div>
-            </div>
-            <div class="card p-4" style="width: 18rem;">
-                <img src="{{ asset('img/halal.jpg') }}" class="mx-auto border rounded-circle" alt="company"
-                    style="width: 5rem; height: 5rem" ;>
-                <div class="card-body">
-                    <h5 class="card-title fw-bold mb-4">Halal Brother</h5>
-                    <p class="card-text">10.000 to 100,000 employs</p>
-                    <p class="card-text mb-3">6.988.877 Followers</p>
-                    <p class="card-text" style="color: #797878">74% Recommendation rate in last 2 years </p>
-                </div>
-                <div class="mt-2">
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">Hiring</a>
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">High Benefits</a>
-                </div>
-            </div>
-            <div class="card p-4" style="width: 18rem;">
-                <img src="{{ asset('img/halal.jpg') }}" class="mx-auto border rounded-circle" alt="company"
-                    style="width: 5rem; height: 5rem" ;>
-                <div class="card-body">
-                    <h5 class="card-title fw-bold mb-4">Halal Brother</h5>
-                    <p class="card-text">10.000 to 100,000 employs</p>
-                    <p class="card-text mb-3">6.988.877 Followers</p>
-                    <p class="card-text" style="color: #797878">74% Recommendation rate in last 2 years </p>
-                </div>
-                <div class="mt-2">
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">Hiring</a>
-                    <a href="#" class="card-link border rounded-pill py-2 px-3">High Benefits</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
+
+    <hr class="my-5">
+
+    <section>
+        <h3 class="text-center font-righteous">Top Training Programs</h3>
+        <div class="container d-flex flex-wrap justify-content-center gap-3 my-5">
+            @foreach ($topTrainings as $train)
+            <div class="card p-4" style="width: 18rem;">
+                <img src="{{ $train->company_logo ? asset('storage/' . $train->company_logo) : asset('img/logo-default.png') }}"
+                    class="mx-auto border rounded-circle" alt="company" style="width: 5rem; height: 5rem">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-4">{{ $train->company_name }}</h5>
+                    <p class="card-text">{{ $train->title }}</p>
+                    <p class="card-text">{{ $train->location }} - {{ $train->job_type }}</p>
+                    <p class="card-text text-muted">{{ \Carbon\Carbon::parse($train->date_posted)->diffForHumans() }}</p>
+                </div>
+                <div class="mt-2">
+                    <a href="{{ route('jobs.show', $train->id) }}" class="card-link border rounded-pill py-2 px-3">View</a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </section>
+
+
+
     <section class="get-app">
         <div class="container">
             <h3 class="text-white">Get The App</h3>
