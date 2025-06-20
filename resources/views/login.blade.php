@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
-    <title>Plerr</title>
+    <title>Jaya Future</title>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
 
                     <span class="text-danger">
                         @error('email')
-                            {{ $message }}
+                        {{ $message }}
                         @enderror
                     </span>
                 </div>
@@ -55,11 +55,11 @@
 
                     <span class="text-danger">
                         @error('password')
-                            {{ $message }}
+                        {{ $message }}
                         @enderror
                     </span>
                 </div>
-                
+
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Sign In</button>
             <div class="mt-3">
@@ -67,8 +67,8 @@
         </form>
     </div>
 
-    
-    
+
+
 </body>
 
 </html>
