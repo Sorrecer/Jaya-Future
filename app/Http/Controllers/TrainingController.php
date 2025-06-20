@@ -12,14 +12,22 @@ class trainingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $trainings = Job::where('job_kind', 'Training')->latest()->simplePaginate(8);
-        if (Auth::user()->role === 'admin') {
-            return view('admin.training.index', compact('trainings'));
+        $query = Job::where('job_kind', 'Training');
+
+        if ($request->has('search')) {
+            $keyword = $request->search;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%{$keyword}%")
+                    ->orWhere('location', 'like', "%{$keyword}%")
+                    ->orWhere('category', 'like', "%{$keyword}%");
+            });
         }
-        return view('admin.training.index');
+
+        $trainings = $query->latest()->paginate(10);
+
+        return view('admin.training.index', compact('trainings'));
     }
 
     /**
@@ -29,7 +37,7 @@ class trainingController extends Controller
     {
         //
         $categories = Tag::all();
-        return view('admin.training.create',compact( 'categories'));
+        return view('admin.training.create', compact('categories'));
     }
 
     /**
@@ -57,7 +65,7 @@ class trainingController extends Controller
 
         Job::create([
             'title' => $request->title,
-            'job_kind' =>$request->job_kind,
+            'job_kind' => $request->job_kind,
             'company_name' => $request->company_name,
             'location' => $request->location,
             'category' => $request->category,

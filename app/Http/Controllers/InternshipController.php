@@ -14,20 +14,22 @@ class internshipController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $search = $request->input('search');
+        $query = Job::where('job_kind', 'Internship');
 
-        $internships = Job::query()
-            ->when($search, function ($query, $search) {
-                $query->where('job_title', 'like', '%' . $search . '%')
-                    ->orWhere('location', 'like', '%' . $search . '%');
-            })
-            ->where('job_kind', 'Internship')->latest()->simplePaginate(8);
-        
-        if (Auth::user()->role === 'admin') {
-            return view('admin.internship.index', compact('internships'));
+        if ($request->has('search')) {
+            $keyword = $request->search;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%{$keyword}%")
+                    ->orWhere('location', 'like', "%{$keyword}%")
+                    ->orWhere('category', 'like', "%{$keyword}%");
+            });
         }
+
+        $internships = $query->latest()->paginate(10);
+
+        return view('admin.internship.index', compact('internships'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -138,7 +140,7 @@ class internshipController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.internship.index')->with('success','Internship Succesfully Update');
+        return redirect()->route('admin.internship.index')->with('success', 'Internship Succesfully Update');
     }
 
     /**

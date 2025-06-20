@@ -15,25 +15,25 @@ class jobController extends Controller
 
     public function index(Request $request)
     {
-        $query = Job::query();
+        // Filter hanya untuk job_kind = Job
+        $query = Job::where('job_kind', 'Job');
 
-        // Jika ada keyword, cari berdasarkan judul, lokasi, dll.
+        // Jika ada keyword, tambahkan kondisi pencarian
         if ($request->filled('keyword')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('title', 'like', '%' . $request->keyword . '%')
-                    ->orWhere('company_name', 'like', '%' . $request->keyword . '%')
-                    ->orWhere('location', 'like', '%' . $request->keyword . '%')
-                    ->orWhere('category', 'like', '%' . $request->keyword . '%');
+            $keyword = $request->keyword;
+
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', '%' . $keyword . '%')
+                    ->orWhere('company_name', 'like', '%' . $keyword . '%')
+                    ->orWhere('location', 'like', '%' . $keyword . '%')
+                    ->orWhere('category', 'like', '%' . $keyword . '%');
             });
-        } else {
-            // Jika tidak ada keyword, filter default hanya job_kind = Job
-            $query->where('job_kind', 'Job');
         }
 
-        // Paginate
+        // Ambil hasil dengan pagination
         $jobs = $query->latest()->simplePaginate(8);
 
-        // Jika admin, pakai tampilan admin
+        // Untuk admin
         if (Auth::check() && Auth::user()->role === 'admin') {
             return view('admin.job.index', compact('jobs'));
         }
@@ -41,6 +41,7 @@ class jobController extends Controller
         // Untuk user biasa
         return view('jobs', compact('jobs'));
     }
+
 
 
     /**
