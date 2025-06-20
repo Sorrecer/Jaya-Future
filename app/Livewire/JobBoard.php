@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Job;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class JobBoard extends Component
 {
@@ -35,12 +36,23 @@ class JobBoard extends Component
     public $jobs;
     public $selectedJob = null;
 
-    public function mount()
+    public function mount(Request $request)
     {
-        $jobKind = ucfirst(strtolower(request()->query('job_kind', 'Job'))); // default ke 'Job'
-        $this->jobs = Job::where('job_kind', $jobKind)->latest()->get();
-    }
+        $query = Job::query();
 
+        // Jika ada pencarian keyword dari URL
+        if ($request->has('keyword')) {
+            $keyword = $request->keyword;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', '%' . $keyword . '%')
+                    ->orWhere('company_name', 'like', '%' . $keyword . '%')
+                    ->orWhere('location', 'like', '%' . $keyword . '%')
+                    ->orWhere('category', 'like', '%' . $keyword . '%');
+            });
+        }
+
+        $this->jobs = $query->latest()->get();
+    }
 
     public function selectJob($jobId)
     {

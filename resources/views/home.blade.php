@@ -7,18 +7,19 @@
     <section class="container">
         <h3 class="text-center my-5 font-righteous">Start Your Jaya Future Carrier</h3>
         <div class="search">
-            <form action="" method="get" id="search-form">
+            <form action="{{ route('jobs') }}" method="GET" id="search-form">
                 <div class="search-box">
                     <div class="input-box">
-                        <input type="text" placeholder="Junior / Intern Position">
+                        <input type="text" name="keyword" placeholder="Junior / Intern Position">
                     </div>
                     <div class="divider"></div>
-                    <div class="search-icon">
+                    <button type="submit" class="search-icon bg-transparent border-0">
                         <i class="bi bi-search"></i>
-                    </div>
+                    </button>
                 </div>
             </form>
         </div>
+
         <p class="text-center">Employers?<a href="#">Post your job here</a></p>
         <div class="job-category d-flex flex-wrap justify-content-center gap-3 my-5">
             <div class="p-2 border rounded">Easy Apply</div>

@@ -13,16 +13,35 @@ class jobController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::where('job_kind', 'Job')->latest()->SimplePaginate(8);
+        $query = Job::query();
 
+        // Jika ada keyword, cari berdasarkan judul, lokasi, dll.
+        if ($request->filled('keyword')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->keyword . '%')
+                    ->orWhere('company_name', 'like', '%' . $request->keyword . '%')
+                    ->orWhere('location', 'like', '%' . $request->keyword . '%')
+                    ->orWhere('category', 'like', '%' . $request->keyword . '%');
+            });
+        } else {
+            // Jika tidak ada keyword, filter default hanya job_kind = Job
+            $query->where('job_kind', 'Job');
+        }
+
+        // Paginate
+        $jobs = $query->latest()->simplePaginate(8);
+
+        // Jika admin, pakai tampilan admin
         if (Auth::check() && Auth::user()->role === 'admin') {
             return view('admin.job.index', compact('jobs'));
         }
 
+        // Untuk user biasa
         return view('jobs', compact('jobs'));
     }
+
 
     /**
      * Show the form for creating a new resource.
